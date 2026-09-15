@@ -140,7 +140,7 @@ export const generateAuditPDF = async (data: AuditReportData): Promise<jsPDF> =>
       },
     });
 
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+     
     yPos = (doc as any).lastAutoTable.finalY + 15;
   }
 
@@ -194,7 +194,7 @@ export const generateAuditPDF = async (data: AuditReportData): Promise<jsPDF> =>
           margin: { left: 22, right: 20 },
         });
 
-        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+         
         yPos = (doc as any).lastAutoTable.finalY + 8;
       }
     });

@@ -36,7 +36,7 @@ export default function HolidaysEditor() {
   }, []);
 
   useEffect(() => {
-    // eslint-disable-next-line react-hooks/set-state-in-effect
+     
     fetchHolidays();
   }, [fetchHolidays]);
 

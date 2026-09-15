@@ -420,7 +420,7 @@ export default function AgendarCitasPage() {
         <div className="p-6">
           {appointments.length === 0 ? (
             <p className="text-center text-gray-500 dark:text-gray-400 py-8 text-sm">
-              No tienes citas agendadas actualmente. Haz clic en "+ Nueva Cita" para programar una.
+              No tienes citas agendadas actualmente. Haz clic en &quot;+ Nueva Cita&quot; para programar una.
             </p>
           ) : (
             <div className="divide-y divide-gray-100 dark:divide-gray-800">

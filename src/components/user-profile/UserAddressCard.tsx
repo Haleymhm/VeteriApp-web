@@ -84,7 +84,7 @@ export default function UserAddressCard() {
   }, []);
 
   useEffect(() => {
-    // eslint-disable-next-line react-hooks/set-state-in-effect
+     
     fetchUser();
     fetchRegionsAndComunas();
   }, [fetchUser, fetchRegionsAndComunas]);

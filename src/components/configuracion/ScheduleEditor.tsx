@@ -50,7 +50,7 @@ export default function ScheduleEditor() {
   }, []);
 
   useEffect(() => {
-    // eslint-disable-next-line react-hooks/set-state-in-effect
+     
     fetchSchedule();
   }, [fetchSchedule]);
 

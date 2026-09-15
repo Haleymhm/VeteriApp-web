@@ -294,12 +294,10 @@ export default function HistorialMedicoPage() {
   };
 
   useEffect(() => {
-    // eslint-disable-next-line react-hooks/exhaustive-deps
     fetchPets();
   }, []);
 
   useEffect(() => {
-    // eslint-disable-next-line react-hooks/exhaustive-deps
     fetchAllMedicalData();
   }, [selectedPetId]);
 
