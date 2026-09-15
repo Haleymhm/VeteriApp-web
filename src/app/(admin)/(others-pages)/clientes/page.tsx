@@ -293,7 +293,7 @@ export default function ClientesPage() {
                             {client.pets.map((pet) => (
                               <span
                                 key={pet.id}
-                                className="px-2 py-0.5 text-xs bg-gray-100 rounded dark:bg-gray-800"
+                                className="px-2 py-0.5 text-xs bg-gray-100 rounded dark:bg-gray-800 dark:text-white/90"
                               >
                                 {pet.name}
                               </span>
@@ -348,7 +348,7 @@ export default function ClientesPage() {
                       setForm({ ...form, firstName: e.target.value })
                     }
                     required
-                    className="w-full px-3 py-2 text-sm border rounded-lg bg-white dark:bg-boxdark border-gray-300 dark:border-strokedark"
+                    className="w-full px-3 py-2 text-sm border rounded-lg bg-white dark:bg-boxdark border-gray-300 dark:border-strokedark dark:text-white/90"
                   />
                 </div>
                 <div>
@@ -362,7 +362,7 @@ export default function ClientesPage() {
                       setForm({ ...form, lastName: e.target.value })
                     }
                     required
-                    className="w-full px-3 py-2 text-sm border rounded-lg bg-white dark:bg-boxdark border-gray-300 dark:border-strokedark"
+                    className="w-full px-3 py-2 text-sm border rounded-lg bg-white dark:bg-boxdark border-gray-300 dark:border-strokedark dark:text-white/90"
                   />
                 </div>
               </div>
@@ -379,7 +379,7 @@ export default function ClientesPage() {
                   }
                   required
                   placeholder="Ej: 12.345.678-9"
-                  className="w-full px-3 py-2 text-sm border rounded-lg bg-white dark:bg-boxdark border-gray-300 dark:border-strokedark"
+                  className="w-full px-3 py-2 text-sm border rounded-lg bg-white dark:bg-boxdark border-gray-300 dark:border-strokedark dark:text-white/90"
                 />
               </div>
 
@@ -394,7 +394,7 @@ export default function ClientesPage() {
                     setForm({ ...form, email: e.target.value })
                   }
                   required
-                  className="w-full px-3 py-2 text-sm border rounded-lg bg-white dark:bg-boxdark border-gray-300 dark:border-strokedark"
+                  className="w-full px-3 py-2 text-sm border rounded-lg bg-white dark:bg-boxdark border-gray-300 dark:border-strokedark dark:text-white/90"
                 />
               </div>
 
@@ -410,7 +410,7 @@ export default function ClientesPage() {
                   }
                   required={!editingClient}
                   minLength={8}
-                  className="w-full px-3 py-2 text-sm border rounded-lg bg-white dark:bg-boxdark border-gray-300 dark:border-strokedark"
+                  className="w-full px-3 py-2 text-sm border rounded-lg bg-white dark:bg-boxdark border-gray-300 dark:border-strokedark dark:text-white/90"
                 />
               </div>
 
@@ -426,7 +426,7 @@ export default function ClientesPage() {
                       setForm({ ...form, phone: e.target.value })
                     }
                     placeholder="Ej: +56 9 1234 5678"
-                    className="w-full px-3 py-2 text-sm border rounded-lg bg-white dark:bg-boxdark border-gray-300 dark:border-strokedark"
+                    className="w-full px-3 py-2 text-sm border rounded-lg bg-white dark:bg-boxdark border-gray-300 dark:border-strokedark dark:text-white/90"
                   />
                 </div>
                 <div>
@@ -438,7 +438,7 @@ export default function ClientesPage() {
                     onChange={(e) =>
                       setForm({ ...form, regionId: e.target.value, comunaId: "" })
                     }
-                    className="w-full px-3 py-2 text-sm border rounded-lg bg-white dark:bg-boxdark border-gray-300 dark:border-strokedark"
+                    className="w-full px-3 py-2 text-sm border rounded-lg bg-white dark:bg-boxdark border-gray-300 dark:border-strokedark dark:text-white/90"
                   >
                     <option value="">Seleccione región</option>
                     {regions.map((region) => (
@@ -461,7 +461,7 @@ export default function ClientesPage() {
                       setForm({ ...form, comunaId: e.target.value })
                     }
                     disabled={!form.regionId}
-                    className="w-full px-3 py-2 text-sm border rounded-lg bg-white dark:bg-boxdark border-gray-300 dark:border-strokedark disabled:opacity-50"
+                    className="w-full px-3 py-2 text-sm border rounded-lg bg-white dark:bg-boxdark border-gray-300 dark:border-strokedark disabled:opacity-50 dark:text-white/90"
                   >
                     <option value="">Seleccione comuna</option>
                     {comunas.map((comuna) => (
@@ -482,7 +482,7 @@ export default function ClientesPage() {
                       setForm({ ...form, address: e.target.value })
                     }
                     placeholder="Ej: Av. Principal 123"
-                    className="w-full px-3 py-2 text-sm border rounded-lg bg-white dark:bg-boxdark border-gray-300 dark:border-strokedark"
+                    className="w-full px-3 py-2 text-sm border rounded-lg bg-white dark:bg-boxdark border-gray-300 dark:border-strokedark dark:text-white/90"
                   />
                 </div>
               </div>
