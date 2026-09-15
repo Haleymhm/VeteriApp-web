@@ -180,9 +180,8 @@ export default function UsuariosPage() {
                       </td>
                       <td className="px-4 py-3">
                         <span
-                          className={`inline-block px-2 py-1 text-xs font-medium rounded-full ${
-                            roleColors[user.role] || "bg-gray-100 text-gray-800"
-                          }`}
+                          className={`inline-block px-2 py-1 text-xs font-medium rounded-full ${roleColors[user.role] || "bg-gray-100 text-gray-800"
+                            }`}
                         >
                           {roleLabels[user.role] || user.role}
                         </span>
@@ -231,7 +230,7 @@ export default function UsuariosPage() {
                     setForm({ ...form, firstName: e.target.value })
                   }
                   required
-                  className="w-full px-3 py-2 text-sm border rounded-lg bg-white dark:bg-boxdark border-gray-300 dark:border-strokedark"
+                  className="w-full px-3 py-2 text-sm border rounded-lg bg-white dark:bg-boxdark border-gray-300 dark:border-strokedark dark:text-white/90"
                 />
               </div>
               <div>
@@ -245,7 +244,7 @@ export default function UsuariosPage() {
                     setForm({ ...form, lastName: e.target.value })
                   }
                   required
-                  className="w-full px-3 py-2 text-sm border rounded-lg bg-white dark:bg-boxdark border-gray-300 dark:border-strokedark"
+                  className="w-full px-3 py-2 text-sm border rounded-lg bg-white dark:bg-boxdark border-gray-300 dark:border-strokedark dark:text-white/90"
                 />
               </div>
               <div>
@@ -259,7 +258,7 @@ export default function UsuariosPage() {
                     setForm({ ...form, email: e.target.value })
                   }
                   required
-                  className="w-full px-3 py-2 text-sm border rounded-lg bg-white dark:bg-boxdark border-gray-300 dark:border-strokedark"
+                  className="w-full px-3 py-2 text-sm border rounded-lg bg-white dark:bg-boxdark border-gray-300 dark:border-strokedark dark:text-white/90"
                 />
               </div>
               <div>
@@ -274,7 +273,7 @@ export default function UsuariosPage() {
                   }
                   required={!editingUser}
                   minLength={8}
-                  className="w-full px-3 py-2 text-sm border rounded-lg bg-white dark:bg-boxdark border-gray-300 dark:border-strokedark"
+                  className="w-full px-3 py-2 text-sm border rounded-lg bg-white dark:bg-boxdark border-gray-300 dark:border-strokedark dark:text-white/90"
                 />
               </div>
               <div>
@@ -284,7 +283,7 @@ export default function UsuariosPage() {
                 <select
                   value={form.role}
                   onChange={(e) => setForm({ ...form, role: e.target.value })}
-                  className="w-full px-3 py-2 text-sm border rounded-lg bg-white dark:bg-boxdark border-gray-300 dark:border-strokedark"
+                  className="w-full px-3 py-2 text-sm border rounded-lg bg-white dark:bg-boxdark border-gray-300 dark:border-strokedark dark:text-white/90"
                 >
                   <option value="VET">Veterinario</option>
                   <option value="RECEPTIONIST">Recepcionista</option>
