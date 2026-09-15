@@ -238,7 +238,7 @@ export default function AuditLogsPage() {
               type="date"
               value={filters.startDate}
               onChange={(e) => setFilters({ ...filters, startDate: e.target.value })}
-              className="px-3 py-2 text-sm border rounded-lg bg-white dark:bg-boxdark border-gray-300 dark:border-strokedark"
+              className="px-3 py-2 text-sm border rounded-lg bg-white dark:bg-boxdark border-gray-300 dark:border-strokedark dark:text-white/90"
             />
           </div>
           <div>
@@ -249,7 +249,7 @@ export default function AuditLogsPage() {
               type="date"
               value={filters.endDate}
               onChange={(e) => setFilters({ ...filters, endDate: e.target.value })}
-              className="px-3 py-2 text-sm border rounded-lg bg-white dark:bg-boxdark border-gray-300 dark:border-strokedark"
+              className="px-3 py-2 text-sm border rounded-lg bg-white dark:bg-boxdark border-gray-300 dark:border-strokedark dark:text-white/90"
             />
           </div>
           <div>
@@ -259,7 +259,7 @@ export default function AuditLogsPage() {
             <select
               value={filters.userId}
               onChange={(e) => setFilters({ ...filters, userId: e.target.value })}
-              className="px-3 py-2 text-sm border rounded-lg bg-white dark:bg-boxdark border-gray-300 dark:border-strokedark min-w-[180px]"
+              className="px-3 py-2 text-sm border rounded-lg bg-white dark:bg-boxdark border-gray-300 dark:border-strokedark min-w-[180px] dark:text-white/90"
             >
               <option value="">Todos</option>
               {users.map((user) => (
@@ -276,7 +276,7 @@ export default function AuditLogsPage() {
             <select
               value={filters.action}
               onChange={(e) => setFilters({ ...filters, action: e.target.value })}
-              className="px-3 py-2 text-sm border rounded-lg bg-white dark:bg-boxdark border-gray-300 dark:border-strokedark"
+              className="px-3 py-2 text-sm border rounded-lg bg-white dark:bg-boxdark border-gray-300 dark:border-strokedark dark:text-white/90"
             >
               <option value="">Todas</option>
               <option value="CREATE">Creación</option>
@@ -292,7 +292,7 @@ export default function AuditLogsPage() {
             <select
               value={filters.module}
               onChange={(e) => setFilters({ ...filters, module: e.target.value })}
-              className="px-3 py-2 text-sm border rounded-lg bg-white dark:bg-boxdark border-gray-300 dark:border-strokedark"
+              className="px-3 py-2 text-sm border rounded-lg bg-white dark:bg-boxdark border-gray-300 dark:border-strokedark dark:text-white/90"
             >
               <option value="">Todos</option>
               {modules.map((mod) => (
@@ -377,9 +377,8 @@ export default function AuditLogsPage() {
                       </td>
                       <td className="px-4 py-3 text-sm">
                         <span
-                          className={`px-2 py-1 text-xs font-medium rounded ${
-                            actionColors[log.action] || "bg-gray-100 text-gray-700"
-                          }`}
+                          className={`px-2 py-1 text-xs font-medium rounded ${actionColors[log.action] || "bg-gray-100 text-gray-700"
+                            }`}
                         >
                           {actionLabels[log.action] || log.action}
                         </span>
@@ -400,11 +399,10 @@ export default function AuditLogsPage() {
                               e.stopPropagation();
                               verifyIntegrity(log.id);
                             }}
-                            className={`flex items-center gap-1 px-2 py-1 rounded ${
-                              integrityStatus[log.id]
+                            className={`flex items-center gap-1 px-2 py-1 rounded ${integrityStatus[log.id]
                                 ? "bg-green-100 text-green-700 dark:bg-green-900/30 dark:text-green-400"
                                 : "bg-red-100 text-red-700 dark:bg-red-900/30 dark:text-red-400"
-                            }`}
+                              }`}
                           >
                             {integrityStatus[log.id] ? "✅ Válido" : "❌ Inválido"}
                           </button>

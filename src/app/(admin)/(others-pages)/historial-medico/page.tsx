@@ -382,7 +382,7 @@ export default function HistorialMedicoPage() {
           <select
             value={selectedPetId || ""}
             onChange={(e) => setSelectedPetId(e.target.value ? parseInt(e.target.value) : null)}
-            className="px-3 py-2 text-sm border rounded-lg bg-white dark:bg-boxdark border-gray-300 dark:border-strokedark min-w-[200px]"
+            className="px-3 py-2 text-sm border rounded-lg bg-white dark:bg-boxdark border-gray-300 dark:border-strokedark min-w-[200px] dark:text-white/90"
           >
             <option value="">Seleccionar mascota...</option>
             {pets.map((pet) => (
@@ -413,8 +413,8 @@ export default function HistorialMedicoPage() {
                 {selectedPet?.species.toLowerCase().includes("perro")
                   ? "🐕"
                   : selectedPet?.species.toLowerCase().includes("gato")
-                  ? "🐈"
-                  : "🐾"}
+                    ? "🐈"
+                    : "🐾"}
               </span>
               <div>
                 <h3 className="font-semibold text-gray-800 dark:text-white/90">
@@ -434,11 +434,10 @@ export default function HistorialMedicoPage() {
                 <button
                   key={tab.key}
                   onClick={() => setActiveTab(tab.key)}
-                  className={`pb-2 px-1 text-sm font-medium border-b-2 transition-colors ${
-                    activeTab === tab.key
-                      ? "border-brand-500 text-brand-500"
-                      : "border-transparent text-gray-500 hover:text-gray-700 dark:text-gray-400"
-                  }`}
+                  className={`pb-2 px-1 text-sm font-medium border-b-2 transition-colors ${activeTab === tab.key
+                    ? "border-brand-500 text-brand-500"
+                    : "border-transparent text-gray-500 hover:text-gray-700 dark:text-gray-400"
+                    }`}
                 >
                   {tab.label}
                 </button>
@@ -457,305 +456,304 @@ export default function HistorialMedicoPage() {
                   {activeTab === "vacunas"
                     ? "Vacuna"
                     : activeTab === "desparasitacion"
-                    ? "Desparasitación"
-                    : activeTab === "quirurgicos"
-                    ? "Intervención"
-                    : activeTab === "consultas"
-                    ? "Consulta"
-                    : "Condición"}
+                      ? "Desparasitación"
+                      : activeTab === "quirurgicos"
+                        ? "Intervención"
+                        : activeTab === "consultas"
+                          ? "Consulta"
+                          : "Condición"}
                 </button>
               )}
             </div>
 
-              <div className="p-4">
-                {activeTab === "resumen" && (
-                  <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
-                    <div className="p-4 rounded-lg bg-green-50 dark:bg-green-900/20 border border-green-200 dark:border-green-800">
-                      <h4 className="text-sm font-medium text-green-700 dark:text-green-400">Vacunas</h4>
-                      <p className="text-2xl font-bold text-green-600 dark:text-green-300">
-                        {vaccinations.length}
-                      </p>
-                      <p className="text-xs text-green-600 dark:text-green-400 mt-1">
-                        {vaccinations.filter((v) => {
-                          if (!v.nextDoseDate) return false;
-                          return new Date(v.nextDoseDate) > new Date();
-                        }).length}{" "}
-                        próximas
-                      </p>
-                    </div>
-                    <div className="p-4 rounded-lg bg-blue-50 dark:bg-blue-900/20 border border-blue-200 dark:border-blue-800">
-                      <h4 className="text-sm font-medium text-blue-700 dark:text-blue-400">
-                        Desparasitaciones
-                      </h4>
-                      <p className="text-2xl font-bold text-blue-600 dark:text-blue-300">
-                        {dewormingRecords.length}
-                      </p>
-                      <p className="text-xs text-blue-600 dark:text-blue-400 mt-1">
-                        Últimas: {dewormingRecords[0] ? formatDate(dewormingRecords[0].date) : "-"}
-                      </p>
-                    </div>
-                    <div className="p-4 rounded-lg bg-purple-50 dark:bg-purple-900/20 border border-purple-200 dark:border-purple-800">
-                      <h4 className="text-sm font-medium text-purple-700 dark:text-purple-400">
-                        Quirúrgicos
-                      </h4>
-                      <p className="text-2xl font-bold text-purple-600 dark:text-purple-300">
-                        {surgicalHistory.length}
-                      </p>
-                      <p className="text-xs text-purple-600 dark:text-purple-400 mt-1">
-                        Procedimientos registrados
-                      </p>
-                    </div>
-                    <div className="p-4 rounded-lg bg-amber-50 dark:bg-amber-900/20 border border-amber-200 dark:border-amber-800">
-                      <h4 className="text-sm font-medium text-amber-700 dark:text-amber-400">
-                        Condiciones Crónicas
-                      </h4>
-                      <p className="text-2xl font-bold text-amber-600 dark:text-amber-300">
-                        {chronicConditions.length}
-                      </p>
-                      <p className="text-xs text-amber-600 dark:text-amber-400 mt-1">
-                        {chronicConditions.filter((c) => c.isActive).length} activas
-                      </p>
-                    </div>
-                    <div className="p-4 rounded-lg bg-red-50 dark:bg-red-900/20 border border-red-200 dark:border-red-800">
-                      <h4 className="text-sm font-medium text-red-700 dark:text-red-400">Consultas</h4>
-                      <p className="text-2xl font-bold text-red-600 dark:text-red-300">
-                        {medicalRecords.length}
-                      </p>
-                      <p className="text-xs text-red-600 dark:text-red-400 mt-1">
-                        Registros médicos
-                      </p>
-                    </div>
+            <div className="p-4">
+              {activeTab === "resumen" && (
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+                  <div className="p-4 rounded-lg bg-green-50 dark:bg-green-900/20 border border-green-200 dark:border-green-800">
+                    <h4 className="text-sm font-medium text-green-700 dark:text-green-400">Vacunas</h4>
+                    <p className="text-2xl font-bold text-green-600 dark:text-green-300">
+                      {vaccinations.length}
+                    </p>
+                    <p className="text-xs text-green-600 dark:text-green-400 mt-1">
+                      {vaccinations.filter((v) => {
+                        if (!v.nextDoseDate) return false;
+                        return new Date(v.nextDoseDate) > new Date();
+                      }).length}{" "}
+                      próximas
+                    </p>
                   </div>
-                )}
+                  <div className="p-4 rounded-lg bg-blue-50 dark:bg-blue-900/20 border border-blue-200 dark:border-blue-800">
+                    <h4 className="text-sm font-medium text-blue-700 dark:text-blue-400">
+                      Desparasitaciones
+                    </h4>
+                    <p className="text-2xl font-bold text-blue-600 dark:text-blue-300">
+                      {dewormingRecords.length}
+                    </p>
+                    <p className="text-xs text-blue-600 dark:text-blue-400 mt-1">
+                      Últimas: {dewormingRecords[0] ? formatDate(dewormingRecords[0].date) : "-"}
+                    </p>
+                  </div>
+                  <div className="p-4 rounded-lg bg-purple-50 dark:bg-purple-900/20 border border-purple-200 dark:border-purple-800">
+                    <h4 className="text-sm font-medium text-purple-700 dark:text-purple-400">
+                      Quirúrgicos
+                    </h4>
+                    <p className="text-2xl font-bold text-purple-600 dark:text-purple-300">
+                      {surgicalHistory.length}
+                    </p>
+                    <p className="text-xs text-purple-600 dark:text-purple-400 mt-1">
+                      Procedimientos registrados
+                    </p>
+                  </div>
+                  <div className="p-4 rounded-lg bg-amber-50 dark:bg-amber-900/20 border border-amber-200 dark:border-amber-800">
+                    <h4 className="text-sm font-medium text-amber-700 dark:text-amber-400">
+                      Condiciones Crónicas
+                    </h4>
+                    <p className="text-2xl font-bold text-amber-600 dark:text-amber-300">
+                      {chronicConditions.length}
+                    </p>
+                    <p className="text-xs text-amber-600 dark:text-amber-400 mt-1">
+                      {chronicConditions.filter((c) => c.isActive).length} activas
+                    </p>
+                  </div>
+                  <div className="p-4 rounded-lg bg-red-50 dark:bg-red-900/20 border border-red-200 dark:border-red-800">
+                    <h4 className="text-sm font-medium text-red-700 dark:text-red-400">Consultas</h4>
+                    <p className="text-2xl font-bold text-red-600 dark:text-red-300">
+                      {medicalRecords.length}
+                    </p>
+                    <p className="text-xs text-red-600 dark:text-red-400 mt-1">
+                      Registros médicos
+                    </p>
+                  </div>
+                </div>
+              )}
 
-                {activeTab === "vacunas" && (
-                  <div className="overflow-x-auto">
-                    <table className="w-full">
-                      <thead>
-                        <tr className="border-b border-stroke dark:border-strokedark">
-                          <th className="px-3 py-2 text-left text-sm font-medium text-gray-500">Vacuna</th>
-                          <th className="px-3 py-2 text-left text-sm font-medium text-gray-500">Tipo</th>
-                          <th className="px-3 py-2 text-left text-sm font-medium text-gray-500">Fecha</th>
-                          <th className="px-3 py-2 text-left text-sm font-medium text-gray-500">Próxima Dosis</th>
-                          <th className="px-3 py-2 text-left text-sm font-medium text-gray-500">Lote</th>
+              {activeTab === "vacunas" && (
+                <div className="overflow-x-auto">
+                  <table className="w-full">
+                    <thead>
+                      <tr className="border-b border-stroke dark:border-strokedark">
+                        <th className="px-3 py-2 text-left text-sm font-medium text-gray-500">Vacuna</th>
+                        <th className="px-3 py-2 text-left text-sm font-medium text-gray-500">Tipo</th>
+                        <th className="px-3 py-2 text-left text-sm font-medium text-gray-500">Fecha</th>
+                        <th className="px-3 py-2 text-left text-sm font-medium text-gray-500">Próxima Dosis</th>
+                        <th className="px-3 py-2 text-left text-sm font-medium text-gray-500">Lote</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      {vaccinations.length === 0 ? (
+                        <tr>
+                          <td colSpan={5} className="px-3 py-6 text-center text-gray-500">
+                            No hay vacunas registradas
+                          </td>
                         </tr>
-                      </thead>
-                      <tbody>
-                        {vaccinations.length === 0 ? (
-                          <tr>
-                            <td colSpan={5} className="px-3 py-6 text-center text-gray-500">
-                              No hay vacunas registradas
-                            </td>
+                      ) : (
+                        vaccinations.map((v) => (
+                          <tr key={v.id} className="border-b border-stroke dark:border-strokedark">
+                            <td className="px-3 py-2 text-sm font-medium dark:text-white">{v.vaccineName}</td>
+                            <td className="px-3 py-2 text-sm text-gray-500 dark:text-white">{v.vaccineType}</td>
+                            <td className="px-3 py-2 text-sm text-gray-500 dark:text-white">{formatDate(v.administrationDate)}</td>
+                            <td className="px-3 py-2 text-sm text-gray-500 dark:text-white">{formatDate(v.nextDoseDate)}</td>
+                            <td className="px-3 py-2 text-sm font-mono text-gray-500 dark:text-white">{v.lotNumber || "-"}</td>
                           </tr>
-                        ) : (
-                          vaccinations.map((v) => (
-                            <tr key={v.id} className="border-b border-stroke dark:border-strokedark">
-                              <td className="px-3 py-2 text-sm font-medium">{v.vaccineName}</td>
-                              <td className="px-3 py-2 text-sm text-gray-500">{v.vaccineType}</td>
-                              <td className="px-3 py-2 text-sm text-gray-500">{formatDate(v.administrationDate)}</td>
-                              <td className="px-3 py-2 text-sm text-gray-500">{formatDate(v.nextDoseDate)}</td>
-                              <td className="px-3 py-2 text-sm font-mono text-gray-500">{v.lotNumber || "-"}</td>
-                            </tr>
-                          ))
-                        )}
-                      </tbody>
-                    </table>
-                  </div>
-                )}
+                        ))
+                      )}
+                    </tbody>
+                  </table>
+                </div>
+              )}
 
-                {activeTab === "desparasitacion" && (
-                  <div className="overflow-x-auto">
-                    <table className="w-full">
-                      <thead>
-                        <tr className="border-b border-stroke dark:border-strokedark">
-                          <th className="px-3 py-2 text-left text-sm font-medium text-gray-500">Producto</th>
-                          <th className="px-3 py-2 text-left text-sm font-medium text-gray-500">Tipo</th>
-                          <th className="px-3 py-2 text-left text-sm font-medium text-gray-500">Fecha</th>
-                          <th className="px-3 py-2 text-left text-sm font-medium text-gray-500">Próxima</th>
-                          <th className="px-3 py-2 text-left text-sm font-medium text-gray-500">Dosis</th>
+              {activeTab === "desparasitacion" && (
+                <div className="overflow-x-auto">
+                  <table className="w-full">
+                    <thead>
+                      <tr className="border-b border-stroke dark:border-strokedark">
+                        <th className="px-3 py-2 text-left text-sm font-medium text-gray-500">Producto</th>
+                        <th className="px-3 py-2 text-left text-sm font-medium text-gray-500">Tipo</th>
+                        <th className="px-3 py-2 text-left text-sm font-medium text-gray-500">Fecha</th>
+                        <th className="px-3 py-2 text-left text-sm font-medium text-gray-500">Próxima</th>
+                        <th className="px-3 py-2 text-left text-sm font-medium text-gray-500">Dosis</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      {dewormingRecords.length === 0 ? (
+                        <tr>
+                          <td colSpan={5} className="px-3 py-6 text-center text-gray-500">
+                            No hay registros de desparasitación
+                          </td>
                         </tr>
-                      </thead>
-                      <tbody>
-                        {dewormingRecords.length === 0 ? (
-                          <tr>
-                            <td colSpan={5} className="px-3 py-6 text-center text-gray-500">
-                              No hay registros de desparasitación
+                      ) : (
+                        dewormingRecords.map((d) => (
+                          <tr key={d.id} className="border-b border-stroke dark:border-strokedark">
+                            <td className="px-3 py-2 text-sm font-medium dark:text-white">{d.productName}</td>
+                            <td className="px-3 py-2 text-sm text-gray-500 dark:text-white">
+                              {dewormingTypeLabels[d.type]}
                             </td>
+                            <td className="px-3 py-2 text-sm text-gray-500 dark:text-white">{formatDate(d.date)}</td>
+                            <td className="px-3 py-2 text-sm text-gray-500 dark:text-white">{formatDate(d.nextDate)}</td>
+                            <td className="px-3 py-2 text-sm text-gray-500 dark:text-white">{d.dosage || "-"}</td>
                           </tr>
-                        ) : (
-                          dewormingRecords.map((d) => (
-                            <tr key={d.id} className="border-b border-stroke dark:border-strokedark">
-                              <td className="px-3 py-2 text-sm font-medium">{d.productName}</td>
-                              <td className="px-3 py-2 text-sm text-gray-500">
-                                {dewormingTypeLabels[d.type]}
-                              </td>
-                              <td className="px-3 py-2 text-sm text-gray-500">{formatDate(d.date)}</td>
-                              <td className="px-3 py-2 text-sm text-gray-500">{formatDate(d.nextDate)}</td>
-                              <td className="px-3 py-2 text-sm text-gray-500">{d.dosage || "-"}</td>
-                            </tr>
-                          ))
-                        )}
-                      </tbody>
-                    </table>
-                  </div>
-                )}
+                        ))
+                      )}
+                    </tbody>
+                  </table>
+                </div>
+              )}
 
-                {activeTab === "quirurgicos" && (
-                  <div className="overflow-x-auto">
-                    <table className="w-full">
-                      <thead>
-                        <tr className="border-b border-stroke dark:border-strokedark">
-                          <th className="px-3 py-2 text-left text-sm font-medium text-gray-500">Procedimiento</th>
-                          <th className="px-3 py-2 text-left text-sm font-medium text-gray-500">Fecha</th>
-                          <th className="px-3 py-2 text-left text-sm font-medium text-gray-500">Complicaciones</th>
-                          <th className="px-3 py-2 text-left text-sm font-medium text-gray-500">Notas</th>
+              {activeTab === "quirurgicos" && (
+                <div className="overflow-x-auto">
+                  <table className="w-full">
+                    <thead>
+                      <tr className="border-b border-stroke dark:border-strokedark">
+                        <th className="px-3 py-2 text-left text-sm font-medium text-gray-500">Procedimiento</th>
+                        <th className="px-3 py-2 text-left text-sm font-medium text-gray-500">Fecha</th>
+                        <th className="px-3 py-2 text-left text-sm font-medium text-gray-500">Complicaciones</th>
+                        <th className="px-3 py-2 text-left text-sm font-medium text-gray-500">Notas</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      {surgicalHistory.length === 0 ? (
+                        <tr>
+                          <td colSpan={4} className="px-3 py-6 text-center text-gray-500">
+                            No hay antecedentes quirúrgicos
+                          </td>
                         </tr>
-                      </thead>
-                      <tbody>
-                        {surgicalHistory.length === 0 ? (
-                          <tr>
-                            <td colSpan={4} className="px-3 py-6 text-center text-gray-500">
-                              No hay antecedentes quirúrgicos
-                            </td>
+                      ) : (
+                        surgicalHistory.map((s) => (
+                          <tr key={s.id} className="border-b border-stroke dark:border-strokedark">
+                            <td className="px-3 py-2 text-sm font-medium dark:text-white">{s.procedure}</td>
+                            <td className="px-3 py-2 text-sm text-gray-500  dark:text-white">{formatDate(s.date)}</td>
+                            <td className="px-3 py-2 text-sm text-gray-500  dark:text-white">{s.complications || "-"}</td>
+                            <td className="px-3 py-2 text-sm text-gray-500  dark:text-white">{s.notes || "-"}</td>
                           </tr>
-                        ) : (
-                          surgicalHistory.map((s) => (
-                            <tr key={s.id} className="border-b border-stroke dark:border-strokedark">
-                              <td className="px-3 py-2 text-sm font-medium">{s.procedure}</td>
-                              <td className="px-3 py-2 text-sm text-gray-500">{formatDate(s.date)}</td>
-                              <td className="px-3 py-2 text-sm text-gray-500">{s.complications || "-"}</td>
-                              <td className="px-3 py-2 text-sm text-gray-500">{s.notes || "-"}</td>
-                            </tr>
-                          ))
-                        )}
-                      </tbody>
-                    </table>
-                  </div>
-                )}
+                        ))
+                      )}
+                    </tbody>
+                  </table>
+                </div>
+              )}
 
-                {activeTab === "consultas" && (
-                  <div className="space-y-4">
-                    {medicalRecords.length === 0 ? (
-                      <p className="text-center text-gray-500 py-6">No hay consultas registradas</p>
-                    ) : (
-                      medicalRecords.map((m) => (
-                        <div
-                          key={m.id}
-                          className="p-4 rounded-lg border border-stroke dark:border-strokedark"
-                        >
-                          <div className="flex justify-between items-start mb-2">
-                            <div>
-                              <h4 className="font-medium text-gray-800 dark:text-white/90">{m.title}</h4>
-                              <p className="text-sm text-gray-500">
-                                {formatDate(m.date)} | Dr. {m.vet.firstName} {m.vet.lastName}
-                              </p>
+              {activeTab === "consultas" && (
+                <div className="space-y-4">
+                  {medicalRecords.length === 0 ? (
+                    <p className="text-center text-gray-500 py-6">No hay consultas registradas</p>
+                  ) : (
+                    medicalRecords.map((m) => (
+                      <div
+                        key={m.id}
+                        className="p-4 rounded-lg border border-stroke dark:border-strokedark"
+                      >
+                        <div className="flex justify-between items-start mb-2">
+                          <div>
+                            <h4 className="font-medium text-gray-800 dark:text-white/90">{m.title}</h4>
+                            <p className="text-sm text-gray-500">
+                              {formatDate(m.date)} | Dr. {m.vet.firstName} {m.vet.lastName}
+                            </p>
+                          </div>
+                        </div>
+                        {m.vitals && (
+                          <div className="grid grid-cols-4 gap-2 mb-3 p-2 bg-gray-50 dark:bg-white/5 rounded">
+                            <div className="text-center">
+                              <p className="text-xs text-gray-500">Peso</p>
+                              <p className="text-sm font-medium dark:text-white/90">{m.vitals.weight || "-"} kg</p>
+                            </div>
+                            <div className="text-center">
+                              <p className="text-xs text-gray-500">Temp</p>
+                              <p className="text-sm font-medium dark:text-white/90">{m.vitals.temperature || "-"} °C</p>
+                            </div>
+                            <div className="text-center">
+                              <p className="text-xs text-gray-500">FC</p>
+                              <p className="text-sm font-medium dark:text-white/90">{m.vitals.heartRate || "-"} lpm</p>
+                            </div>
+                            <div className="text-center">
+                              <p className="text-xs text-gray-500">FR</p>
+                              <p className="text-sm font-medium dark:text-white/90">{m.vitals.respiratoryRate || "-"} rpm</p>
                             </div>
                           </div>
-                          {m.vitals && (
-                            <div className="grid grid-cols-4 gap-2 mb-3 p-2 bg-gray-50 dark:bg-white/5 rounded">
-                              <div className="text-center">
-                                <p className="text-xs text-gray-500">Peso</p>
-                                <p className="text-sm font-medium">{m.vitals.weight || "-"} kg</p>
-                              </div>
-                              <div className="text-center">
-                                <p className="text-xs text-gray-500">Temp</p>
-                                <p className="text-sm font-medium">{m.vitals.temperature || "-"} °C</p>
-                              </div>
-                              <div className="text-center">
-                                <p className="text-xs text-gray-500">FC</p>
-                                <p className="text-sm font-medium">{m.vitals.heartRate || "-"} lpm</p>
-                              </div>
-                              <div className="text-center">
-                                <p className="text-xs text-gray-500">FR</p>
-                                <p className="text-sm font-medium">{m.vitals.respiratoryRate || "-"} rpm</p>
-                              </div>
-                            </div>
-                          )}
-                          {m.diagnosis && (
-                            <p className="text-sm mb-1">
-                              <span className="font-medium">Diagnóstico:</span> {m.diagnosis}
-                            </p>
-                          )}
-                          {m.treatment && (
-                            <p className="text-sm mb-1">
-                              <span className="font-medium">Tratamiento:</span> {m.treatment}
-                            </p>
-                          )}
-                          <p className="text-sm text-gray-600 dark:text-gray-400 mt-2">{m.publicNotes}</p>
-                          {m.privateNotes && (
-                            <p className="text-sm text-red-600 dark:text-red-400 mt-2 italic">
-                              <span className="font-medium">Nota Privada:</span> {m.privateNotes}
-                            </p>
-                          )}
-                          {m.exams && m.exams.length > 0 && (
-                            <div className="mt-2">
-                              <p className="text-xs font-medium text-gray-500">Exámenes:</p>
-                              <div className="flex gap-2 mt-1">
-                                {m.exams.map((e) => (
-                                  <span
-                                    key={e.id}
-                                    className="px-2 py-1 text-xs bg-gray-100 dark:bg-white/10 rounded"
-                                  >
-                                    {e.fileName}
-                                  </span>
-                                ))}
-                              </div>
-                            </div>
-                          )}
-                        </div>
-                      ))
-                    )}
-                  </div>
-                )}
-
-                {activeTab === "alergias" && (
-                  <div className="overflow-x-auto">
-                    <table className="w-full">
-                      <thead>
-                        <tr className="border-b border-stroke dark:border-strokedark">
-                          <th className="px-3 py-2 text-left text-sm font-medium text-gray-500">Nombre</th>
-                          <th className="px-3 py-2 text-left text-sm font-medium text-gray-500">Tipo</th>
-                          <th className="px-3 py-2 text-left text-sm font-medium text-gray-500">Severidad</th>
-                          <th className="px-3 py-2 text-left text-sm font-medium text-gray-500">Estado</th>
-                          <th className="px-3 py-2 text-left text-sm font-medium text-gray-500">Notas</th>
-                        </tr>
-                      </thead>
-                      <tbody>
-                        {chronicConditions.length === 0 ? (
-                          <tr>
-                            <td colSpan={5} className="px-3 py-6 text-center text-gray-500">
-                              No hay condiciones crónicas registradas
-                            </td>
-                          </tr>
-                        ) : (
-                          chronicConditions.map((c) => (
-                            <tr key={c.id} className="border-b border-stroke dark:border-strokedark">
-                              <td className="px-3 py-2 text-sm font-medium">{c.name}</td>
-                              <td className="px-3 py-2 text-sm text-gray-500">{c.type}</td>
-                              <td className="px-3 py-2 text-sm text-gray-500">{c.severity || "-"}</td>
-                              <td className="px-3 py-2">
-                                <span
-                                  className={`px-2 py-1 text-xs rounded ${
-                                    c.isActive
-                                      ? "bg-green-100 text-green-700 dark:bg-green-900/30 dark:text-green-400"
-                                      : "bg-gray-100 text-gray-600 dark:bg-white/10 dark:text-gray-400"
-                                  }`}
-                                >
-                                  {c.isActive ? "Activa" : "Inactiva"}
-                                </span>
-                              </td>
-                              <td className="px-3 py-2 text-sm text-gray-500">{c.notes || "-"}</td>
-                            </tr>
-                          ))
                         )}
-                      </tbody>
-                    </table>
-                  </div>
-                )}
-              </div>
+                        {m.diagnosis && (
+                          <p className="text-sm mb-1">
+                            <span className="font-medium text-gray-500 ">Diagnóstico:</span> <span className="text-gray-600 dark:text-white">{m.diagnosis}</span>
+                          </p>
+                        )}
+                        {m.treatment && (
+                          <p className="text-sm mb-1">
+                            <span className="font-medium text-gray-500 ">Tratamiento:</span> <span className="text-gray-600 dark:text-white">{m.treatment}</span>
+                          </p>
+                        )}
+                        <p className="text-sm text-gray-600 dark:text-gray-400 mt-2">{m.publicNotes}</p>
+                        {m.privateNotes && (
+                          <p className="text-sm text-red-600 dark:text-red-400 mt-2 italic">
+                            <span className="font-medium">Nota Privada:</span> {m.privateNotes}
+                          </p>
+                        )}
+                        {m.exams && m.exams.length > 0 && (
+                          <div className="mt-2">
+                            <p className="text-xs font-medium text-gray-500">Exámenes:</p>
+                            <div className="flex gap-2 mt-1">
+                              {m.exams.map((e) => (
+                                <span
+                                  key={e.id}
+                                  className="px-2 py-1 text-xs bg-gray-100 dark:bg-white/10 rounded"
+                                >
+                                  {e.fileName}
+                                </span>
+                              ))}
+                            </div>
+                          </div>
+                        )}
+                      </div>
+                    ))
+                  )}
+                </div>
+              )}
+
+              {activeTab === "alergias" && (
+                <div className="overflow-x-auto">
+                  <table className="w-full">
+                    <thead>
+                      <tr className="border-b border-stroke dark:border-strokedark">
+                        <th className="px-3 py-2 text-left text-sm font-medium text-gray-500">Nombre</th>
+                        <th className="px-3 py-2 text-left text-sm font-medium text-gray-500">Tipo</th>
+                        <th className="px-3 py-2 text-left text-sm font-medium text-gray-500">Severidad</th>
+                        <th className="px-3 py-2 text-left text-sm font-medium text-gray-500">Estado</th>
+                        <th className="px-3 py-2 text-left text-sm font-medium text-gray-500">Notas</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      {chronicConditions.length === 0 ? (
+                        <tr>
+                          <td colSpan={5} className="px-3 py-6 text-center text-gray-500">
+                            No hay condiciones crónicas registradas
+                          </td>
+                        </tr>
+                      ) : (
+                        chronicConditions.map((c) => (
+                          <tr key={c.id} className="border-b border-stroke dark:border-strokedark">
+                            <td className="px-3 py-2 text-sm font-medium text-gray-500 dark:text-white/90">{c.name}</td>
+                            <td className="px-3 py-2 text-sm text-gray-500 dark:text-white/90">{c.type}</td>
+                            <td className="px-3 py-2 text-sm text-gray-500 dark:text-white/90">{c.severity || "-"}</td>
+                            <td className="px-3 py-2">
+                              <span
+                                className={`px-2 py-1 text-xs rounded ${c.isActive
+                                  ? "bg-green-100 text-green-700 dark:bg-green-900/30 dark:text-green-400"
+                                  : "bg-gray-100 text-gray-600 dark:bg-white/10 dark:text-gray-400"
+                                  }`}
+                              >
+                                {c.isActive ? "Activa" : "Inactiva"}
+                              </span>
+                            </td>
+                            <td className="px-3 py-2 text-sm text-gray-500">{c.notes || "-"}</td>
+                          </tr>
+                        ))
+                      )}
+                    </tbody>
+                  </table>
+                </div>
+              )}
             </div>
-          </>
-        )}
+          </div>
+        </>
+      )}
 
       {!selectedPetId && (
         <div className="rounded-sm border border-stroke bg-white shadow-default dark:border-strokedark dark:bg-boxgray p-12 text-center">
@@ -785,7 +783,7 @@ export default function HistorialMedicoPage() {
                         value={formData.vaccineName || ""}
                         onChange={(e) => setFormData({ ...formData, vaccineName: e.target.value })}
                         required
-                        className="w-full px-3 py-2 text-sm border rounded-lg bg-white dark:bg-boxdark border-gray-300 dark:border-strokedark"
+                        className="w-full px-3 py-2 text-sm border rounded-lg bg-white dark:bg-boxdark border-gray-300 dark:border-strokedark dark:text-white/90"
                       >
                         <option value="">Seleccionar</option>
                         <option value="Óctuple">Óctuple (Perros)</option>
@@ -806,7 +804,7 @@ export default function HistorialMedicoPage() {
                         onChange={(e) => setFormData({ ...formData, vaccineType: e.target.value })}
                         required
                         placeholder="Ej: Viral, Bacteriana"
-                        className="w-full px-3 py-2 text-sm border rounded-lg bg-white dark:bg-boxdark border-gray-300 dark:border-strokedark"
+                        className="w-full px-3 py-2 text-sm border rounded-lg bg-white dark:bg-boxdark border-gray-300 dark:border-strokedark dark:text-white/90"
                       />
                     </div>
                   </div>
@@ -819,7 +817,7 @@ export default function HistorialMedicoPage() {
                         type="date"
                         value={formData.administrationDate || ""}
                         onChange={(e) => setFormData({ ...formData, administrationDate: e.target.value })}
-                        className="w-full px-3 py-2 text-sm border rounded-lg bg-white dark:bg-boxdark border-gray-300 dark:border-strokedark"
+                        className="w-full px-3 py-2 text-sm border rounded-lg bg-white dark:bg-boxdark border-gray-300 dark:border-strokedark dark:text-white/90"
                       />
                     </div>
                     <div>
@@ -830,7 +828,7 @@ export default function HistorialMedicoPage() {
                         type="date"
                         value={formData.nextDoseDate || ""}
                         onChange={(e) => setFormData({ ...formData, nextDoseDate: e.target.value })}
-                        className="w-full px-3 py-2 text-sm border rounded-lg bg-white dark:bg-boxdark border-gray-300 dark:border-strokedark"
+                        className="w-full px-3 py-2 text-sm border rounded-lg bg-white dark:bg-boxdark border-gray-300 dark:border-strokedark dark:text-white/90  "
                       />
                     </div>
                   </div>
@@ -843,7 +841,7 @@ export default function HistorialMedicoPage() {
                         type="text"
                         value={formData.lotNumber || ""}
                         onChange={(e) => setFormData({ ...formData, lotNumber: e.target.value })}
-                        className="w-full px-3 py-2 text-sm border rounded-lg bg-white dark:bg-boxdark border-gray-300 dark:border-strokedark"
+                        className="w-full px-3 py-2 text-sm border rounded-lg bg-white dark:bg-boxdark border-gray-300 dark:border-strokedark dark:text-white/90"
                       />
                     </div>
                     <div>
@@ -854,7 +852,7 @@ export default function HistorialMedicoPage() {
                         type="text"
                         value={formData.manufacturer || ""}
                         onChange={(e) => setFormData({ ...formData, manufacturer: e.target.value })}
-                        className="w-full px-3 py-2 text-sm border rounded-lg bg-white dark:bg-boxdark border-gray-300 dark:border-strokedark"
+                        className="w-full px-3 py-2 text-sm border rounded-lg bg-white dark:bg-boxdark border-gray-300 dark:border-strokedark dark:text-white/90"
                       />
                     </div>
                   </div>
@@ -873,7 +871,7 @@ export default function HistorialMedicoPage() {
                       onChange={(e) => setFormData({ ...formData, productName: e.target.value })}
                       required
                       placeholder="Ej: Drontal, Frontline"
-                      className="w-full px-3 py-2 text-sm border rounded-lg bg-white dark:bg-boxdark border-gray-300 dark:border-strokedark"
+                      className="w-full px-3 py-2 text-sm border rounded-lg bg-white dark:bg-boxdark border-gray-300 dark:border-strokedark dark:text-white/90"
                     />
                   </div>
                   <div className="grid grid-cols-2 gap-4">
@@ -885,7 +883,7 @@ export default function HistorialMedicoPage() {
                         value={formData.type || ""}
                         onChange={(e) => setFormData({ ...formData, type: e.target.value })}
                         required
-                        className="w-full px-3 py-2 text-sm border rounded-lg bg-white dark:bg-boxdark border-gray-300 dark:border-strokedark"
+                        className="w-full px-3 py-2 text-sm border rounded-lg bg-white dark:bg-boxdark border-gray-300 dark:border-strokedark dark:text-white/90"
                       >
                         <option value="">Seleccionar</option>
                         <option value="INTERNAL">Interno</option>
@@ -901,7 +899,7 @@ export default function HistorialMedicoPage() {
                         type="date"
                         value={formData.date || ""}
                         onChange={(e) => setFormData({ ...formData, date: e.target.value })}
-                        className="w-full px-3 py-2 text-sm border rounded-lg bg-white dark:bg-boxdark border-gray-300 dark:border-strokedark"
+                        className="w-full px-3 py-2 text-sm border rounded-lg bg-white dark:bg-boxdark border-gray-300 dark:border-strokedark dark:text-white/90 "
                       />
                     </div>
                   </div>
@@ -914,7 +912,7 @@ export default function HistorialMedicoPage() {
                         type="date"
                         value={formData.nextDate || ""}
                         onChange={(e) => setFormData({ ...formData, nextDate: e.target.value })}
-                        className="w-full px-3 py-2 text-sm border rounded-lg bg-white dark:bg-boxdark border-gray-300 dark:border-strokedark"
+                        className="w-full px-3 py-2 text-sm border rounded-lg bg-white dark:bg-boxdark border-gray-300 dark:border-strokedark dark:text-white/90 "
                       />
                     </div>
                     <div>
@@ -926,7 +924,7 @@ export default function HistorialMedicoPage() {
                         value={formData.dosage || ""}
                         onChange={(e) => setFormData({ ...formData, dosage: e.target.value })}
                         placeholder="Ej: 1ml, 1 comprimido"
-                        className="w-full px-3 py-2 text-sm border rounded-lg bg-white dark:bg-boxdark border-gray-300 dark:border-strokedark"
+                        className="w-full px-3 py-2 text-sm border rounded-lg bg-white dark:bg-boxdark border-gray-300 dark:border-strokedark dark:text-white/90 "
                       />
                     </div>
                   </div>
@@ -945,7 +943,7 @@ export default function HistorialMedicoPage() {
                       onChange={(e) => setFormData({ ...formData, procedure: e.target.value })}
                       required
                       placeholder="Ej: Esterilización, Extracción dental"
-                      className="w-full px-3 py-2 text-sm border rounded-lg bg-white dark:bg-boxdark border-gray-300 dark:border-strokedark"
+                      className="w-full px-3 py-2 text-sm border rounded-lg bg-white dark:bg-boxdark border-gray-300 dark:border-strokedark dark:text-white/90 "
                     />
                   </div>
                   <div className="grid grid-cols-2 gap-4">
@@ -957,7 +955,7 @@ export default function HistorialMedicoPage() {
                         type="date"
                         value={formData.date || ""}
                         onChange={(e) => setFormData({ ...formData, date: e.target.value })}
-                        className="w-full px-3 py-2 text-sm border rounded-lg bg-white dark:bg-boxdark border-gray-300 dark:border-strokedark"
+                        className="w-full px-3 py-2 text-sm border rounded-lg bg-white dark:bg-boxdark border-gray-300 dark:border-strokedark dark:text-white/90 "
                       />
                     </div>
                     <div>
@@ -969,7 +967,7 @@ export default function HistorialMedicoPage() {
                         value={formData.outcomes || ""}
                         onChange={(e) => setFormData({ ...formData, outcomes: e.target.value })}
                         placeholder="Ej: Exitoso"
-                        className="w-full px-3 py-2 text-sm border rounded-lg bg-white dark:bg-boxdark border-gray-300 dark:border-strokedark"
+                        className="w-full px-3 py-2 text-sm border rounded-lg bg-white dark:bg-boxdark border-gray-300 dark:border-strokedark dark:text-white/90 "
                       />
                     </div>
                   </div>
@@ -981,7 +979,7 @@ export default function HistorialMedicoPage() {
                       value={formData.complications || ""}
                       onChange={(e) => setFormData({ ...formData, complications: e.target.value })}
                       rows={2}
-                      className="w-full px-3 py-2 text-sm border rounded-lg bg-white dark:bg-boxdark border-gray-300 dark:border-strokedark resize-none"
+                      className="w-full px-3 py-2 text-sm border rounded-lg bg-white dark:bg-boxdark border-gray-300 dark:border-strokedark dark:text-white/90 resize-none"
                     />
                   </div>
                   <div>
@@ -992,7 +990,7 @@ export default function HistorialMedicoPage() {
                       value={formData.notes || ""}
                       onChange={(e) => setFormData({ ...formData, notes: e.target.value })}
                       rows={2}
-                      className="w-full px-3 py-2 text-sm border rounded-lg bg-white dark:bg-boxdark border-gray-300 dark:border-strokedark resize-none"
+                      className="w-full px-3 py-2 text-sm border rounded-lg bg-white dark:bg-boxdark border-gray-300 dark:border-strokedark dark:text-white/90 resize-none"
                     />
                   </div>
                 </>
@@ -1009,7 +1007,7 @@ export default function HistorialMedicoPage() {
                         type="date"
                         value={formData.date || ""}
                         onChange={(e) => setFormData({ ...formData, date: e.target.value })}
-                        className="w-full px-3 py-2 text-sm border rounded-lg bg-white dark:bg-boxdark border-gray-300 dark:border-strokedark"
+                        className="w-full px-3 py-2 text-sm border rounded-lg bg-white dark:bg-boxdark border-gray-300 dark:border-strokedark dark:text-white/90 "
                       />
                     </div>
                     <div>
@@ -1022,7 +1020,7 @@ export default function HistorialMedicoPage() {
                         onChange={(e) => setFormData({ ...formData, title: e.target.value })}
                         required
                         placeholder="Ej: Control, Vacunación"
-                        className="w-full px-3 py-2 text-sm border rounded-lg bg-white dark:bg-boxdark border-gray-300 dark:border-strokedark"
+                        className="w-full px-3 py-2 text-sm border rounded-lg bg-white dark:bg-boxdark border-gray-300 dark:border-strokedark dark:text-white/90 "
                       />
                     </div>
                   </div>
@@ -1036,7 +1034,7 @@ export default function HistorialMedicoPage() {
                         step="0.1"
                         value={formData.weight || ""}
                         onChange={(e) => setFormData({ ...formData, weight: e.target.value })}
-                        className="w-full px-3 py-2 text-sm border rounded-lg bg-white dark:bg-boxdark border-gray-300 dark:border-strokedark"
+                        className="w-full px-3 py-2 text-sm border rounded-lg bg-white dark:bg-boxdark border-gray-300 dark:border-strokedark dark:text-white/90 "
                       />
                     </div>
                     <div>
@@ -1048,7 +1046,7 @@ export default function HistorialMedicoPage() {
                         step="0.1"
                         value={formData.temperature || ""}
                         onChange={(e) => setFormData({ ...formData, temperature: e.target.value })}
-                        className="w-full px-3 py-2 text-sm border rounded-lg bg-white dark:bg-boxdark border-gray-300 dark:border-strokedark"
+                        className="w-full px-3 py-2 text-sm border rounded-lg bg-white dark:bg-boxdark border-gray-300 dark:border-strokedark dark:text-white/90 "
                       />
                     </div>
                     <div>
@@ -1059,7 +1057,7 @@ export default function HistorialMedicoPage() {
                         type="number"
                         value={formData.heartRate || ""}
                         onChange={(e) => setFormData({ ...formData, heartRate: e.target.value })}
-                        className="w-full px-3 py-2 text-sm border rounded-lg bg-white dark:bg-boxdark border-gray-300 dark:border-strokedark"
+                        className="w-full px-3 py-2 text-sm border rounded-lg bg-white dark:bg-boxdark border-gray-300 dark:border-strokedark dark:text-white/90 "
                       />
                     </div>
                     <div>
@@ -1070,7 +1068,7 @@ export default function HistorialMedicoPage() {
                         type="number"
                         value={formData.respiratoryRate || ""}
                         onChange={(e) => setFormData({ ...formData, respiratoryRate: e.target.value })}
-                        className="w-full px-3 py-2 text-sm border rounded-lg bg-white dark:bg-boxdark border-gray-300 dark:border-strokedark"
+                        className="w-full px-3 py-2 text-sm border rounded-lg bg-white dark:bg-boxdark border-gray-300 dark:border-strokedark dark:text-white/90 "
                       />
                     </div>
                   </div>
@@ -1082,7 +1080,7 @@ export default function HistorialMedicoPage() {
                       value={formData.diagnosis || ""}
                       onChange={(e) => setFormData({ ...formData, diagnosis: e.target.value })}
                       rows={2}
-                      className="w-full px-3 py-2 text-sm border rounded-lg bg-white dark:bg-boxdark border-gray-300 dark:border-strokedark resize-none"
+                      className="w-full px-3 py-2 text-sm border rounded-lg bg-white dark:bg-boxdark border-gray-300 dark:border-strokedark dark:text-white/90 resize-none"
                     />
                   </div>
                   <div>
@@ -1093,7 +1091,7 @@ export default function HistorialMedicoPage() {
                       value={formData.treatment || ""}
                       onChange={(e) => setFormData({ ...formData, treatment: e.target.value })}
                       rows={2}
-                      className="w-full px-3 py-2 text-sm border rounded-lg bg-white dark:bg-boxdark border-gray-300 dark:border-strokedark resize-none"
+                      className="w-full px-3 py-2 text-sm border rounded-lg bg-white dark:bg-boxdark border-gray-300 dark:border-strokedark dark:text-white/90 resize-none"
                     />
                   </div>
                   <div>
@@ -1105,7 +1103,7 @@ export default function HistorialMedicoPage() {
                       onChange={(e) => setFormData({ ...formData, publicNotes: e.target.value })}
                       required
                       rows={3}
-                      className="w-full px-3 py-2 text-sm border rounded-lg bg-white dark:bg-boxdark border-gray-300 dark:border-strokedark resize-none"
+                      className="w-full px-3 py-2 text-sm border rounded-lg bg-white dark:bg-boxdark border-gray-300 dark:border-strokedark dark:text-white/90  resize-none"
                     />
                   </div>
                   <div>
@@ -1116,7 +1114,7 @@ export default function HistorialMedicoPage() {
                       value={formData.privateNotes || ""}
                       onChange={(e) => setFormData({ ...formData, privateNotes: e.target.value })}
                       rows={2}
-                      className="w-full px-3 py-2 text-sm border rounded-lg bg-white dark:bg-boxdark border-gray-300 dark:border-strokedark resize-none"
+                      className="w-full px-3 py-2 text-sm border rounded-lg bg-white dark:bg-boxdark border-gray-300 dark:border-strokedark dark:text-white/90  resize-none"
                     />
                   </div>
                 </>
@@ -1135,7 +1133,7 @@ export default function HistorialMedicoPage() {
                         onChange={(e) => setFormData({ ...formData, name: e.target.value })}
                         required
                         placeholder="Ej: Alergia al pollo, Diabetes"
-                        className="w-full px-3 py-2 text-sm border rounded-lg bg-white dark:bg-boxdark border-gray-300 dark:border-strokedark"
+                        className="w-full px-3 py-2 text-sm border rounded-lg bg-white dark:bg-boxdark border-gray-300 dark:border-strokedark dark:text-white/90  "
                       />
                     </div>
                     <div>
@@ -1146,7 +1144,7 @@ export default function HistorialMedicoPage() {
                         value={formData.type || ""}
                         onChange={(e) => setFormData({ ...formData, type: e.target.value })}
                         required
-                        className="w-full px-3 py-2 text-sm border rounded-lg bg-white dark:bg-boxdark border-gray-300 dark:border-strokedark"
+                        className="w-full px-3 py-2 text-sm border rounded-lg bg-white dark:bg-boxdark border-gray-300 dark:border-strokedark dark:text-white/90  "
                       >
                         <option value="">Seleccionar</option>
                         <option value="ALERGIA_ALIMENTARIA">Alergia Alimentaria</option>
@@ -1165,7 +1163,7 @@ export default function HistorialMedicoPage() {
                       <select
                         value={formData.severity || ""}
                         onChange={(e) => setFormData({ ...formData, severity: e.target.value })}
-                        className="w-full px-3 py-2 text-sm border rounded-lg bg-white dark:bg-boxdark border-gray-300 dark:border-strokedark"
+                        className="w-full px-3 py-2 text-sm border rounded-lg bg-white dark:bg-boxdark border-gray-300 dark:border-strokedark dark:text-white/90  "
                       >
                         <option value="">Seleccionar</option>
                         <option value="LEVE">Leve</option>
@@ -1181,7 +1179,7 @@ export default function HistorialMedicoPage() {
                         type="date"
                         value={formData.diagnosisDate || ""}
                         onChange={(e) => setFormData({ ...formData, diagnosisDate: e.target.value })}
-                        className="w-full px-3 py-2 text-sm border rounded-lg bg-white dark:bg-boxdark border-gray-300 dark:border-strokedark"
+                        className="w-full px-3 py-2 text-sm border rounded-lg bg-white dark:bg-boxdark border-gray-300 dark:border-strokedark dark:text-white/90  "
                       />
                     </div>
                   </div>
@@ -1194,7 +1192,7 @@ export default function HistorialMedicoPage() {
                       onChange={(e) => setFormData({ ...formData, notes: e.target.value })}
                       rows={3}
                       placeholder="Detalles adicionales sobre la condición..."
-                      className="w-full px-3 py-2 text-sm border rounded-lg bg-white dark:bg-boxdark border-gray-300 dark:border-strokedark resize-none"
+                      className="w-full px-3 py-2 text-sm border rounded-lg bg-white dark:bg-boxdark border-gray-300 dark:border-strokedark dark:text-white/90 resize-none"
                     />
                   </div>
                 </>
