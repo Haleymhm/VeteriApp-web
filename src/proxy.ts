@@ -1,7 +1,17 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { jwtVerify, JWT_SECRET, JWTPayload } from '@/lib/jwt';
 
-const PUBLIC_PATHS = ['/signin', '/signup', '/forgot-password', '/reset-password', '/api/v1/auth/login', '/api/v1/auth/register', '/api/v1/auth/forgot-password', '/api/v1/auth/reset-password'];
+const PUBLIC_PATHS = [
+  '/signin',
+  '/signup',
+  '/forgot-password',
+  '/reset-password',
+  '/api/v1/auth/login',
+  '/api/v1/auth/register',
+  '/api/v1/auth/forgot-password',
+  '/api/v1/auth/reset-password',
+  '/images',
+];
 const AUTH_API_PATHS = ['/api/v1/auth/session', '/api/v1/auth/logout'];
 const ADMIN_ONLY_PATHS = ['/usuarios', '/configuracion'];
 const STAFF_PATHS = ['/calendar', '/categorias', '/clientes', '/mascotas', '/historial-medico', '/regiones', '/comunas'];
@@ -122,6 +132,6 @@ export async function proxy(request: NextRequest) {
 
 export const config = {
   matcher: [
-    '/((?!_next/static|_next/image|favicon.ico|public/).*)',
+    '/((?!_next/static|_next/image|favicon.ico|images/|uploads/|.*\\.(?:svg|png|jpg|jpeg|gif|webp|ico)$).*)',
   ],
 };
