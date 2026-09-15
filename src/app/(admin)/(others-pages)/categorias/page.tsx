@@ -190,7 +190,7 @@ export default function CategoriasPage() {
                   onChange={(e) => setForm({ ...form, name: e.target.value })}
                   required
                   placeholder="Ej: Consulta Veterinaria"
-                  className="w-full px-3 py-2 text-sm border rounded-lg bg-white dark:bg-boxdark border-gray-300 dark:border-strokedark"
+                  className="w-full px-3 py-2 text-sm border rounded-lg bg-white dark:bg-boxdark border-gray-300 dark:border-strokedark dark:text-white/90"
                 />
               </div>
               <div>
@@ -202,14 +202,14 @@ export default function CategoriasPage() {
                     type="color"
                     value={form.color}
                     onChange={(e) => setForm({ ...form, color: e.target.value })}
-                    className="w-12 h-10 rounded border border-gray-300 cursor-pointer"
+                    className="w-12 h-10 rounded border border-gray-300 cursor-pointer dark:bg-boxdark dark:text-white/90"
                   />
                   <input
                     type="text"
                     value={form.color}
                     onChange={(e) => setForm({ ...form, color: e.target.value })}
                     placeholder="#3b82f6"
-                    className="flex-1 px-3 py-2 text-sm border rounded-lg bg-white dark:bg-boxdark border-gray-300 dark:border-strokedark font-mono"
+                    className="flex-1 px-3 py-2 text-sm border rounded-lg bg-white dark:bg-boxdark border-gray-300 dark:border-strokedark font-mono dark:text-white/90"
                   />
                 </div>
               </div>
@@ -223,11 +223,10 @@ export default function CategoriasPage() {
                       key={color}
                       type="button"
                       onClick={() => setForm({ ...form, color })}
-                      className={`w-8 h-8 rounded-full border-2 transition-transform hover:scale-110 ${
-                        form.color === color
-                          ? "border-gray-800 dark:border-white"
-                          : "border-transparent"
-                      }`}
+                      className={`w-8 h-8 rounded-full border-2 transition-transform hover:scale-110 ${form.color === color
+                        ? "border-gray-800 dark:border-white"
+                        : "border-transparent"
+                        }`}
                       style={{ backgroundColor: color }}
                     />
                   ))}
