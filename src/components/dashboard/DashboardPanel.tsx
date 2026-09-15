@@ -11,6 +11,7 @@ import SpeciesDistributionChart from './SpeciesDistributionChart';
 import UpcomingAppointmentsList from './UpcomingAppointmentsList';
 import TopVetsChart from './TopVetsChart';
 import DashboardRangeSelector from './DashboardRangeSelector';
+import QuickActionsBar from './QuickActionsBar';
 
 interface Props {
   metrics: DashboardMetricsDTO;
@@ -31,15 +32,17 @@ export default function DashboardPanel({ metrics, initialRange }: Props) {
     <div className="space-y-6">
       <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
         <div>
-          <h1 className="text-2xl font-semibold text-gray-800 dark:text-white/90">
-            Panel general
+          <h1 className="text-2xl font-bold text-gray-900 dark:text-white">
+            Centro de Control Clínico
           </h1>
           <p className="text-sm text-gray-500 dark:text-gray-400">
-            Resumen de {metrics.rangeLabel.toLowerCase()}
+            Resumen operativo y atenciones veterinarias de {metrics.rangeLabel.toLowerCase()}
           </p>
         </div>
         <DashboardRangeSelector active={initialRange} />
       </div>
+
+      <QuickActionsBar />
 
       <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 xl:grid-cols-4 md:gap-6">
         <KpiCard

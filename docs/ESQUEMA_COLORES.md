@@ -2,24 +2,24 @@
 
 La aplicación usa **Tailwind CSS v4** con variables CSS definidas en `src/app/globals.css`. Soporta **modo claro y modo oscuro** (`.dark`).
 
-## Paleta principal (Brand) — Azul
+## Paleta principal (Brand) — Verde Clínico / Forest Sage
 
-Color primario de la marca, usado en botones primarios, enlaces activos, foco de inputs y estados seleccionados.
+Color primario de la marca, usado en botones primarios, enlaces activos, foco de inputs y estados seleccionados. Transmite salud animal, rigor biomédico, naturaleza y serenidad.
 
 | Token | Hex |
 | --- | --- |
-| brand-25 | `#f2f7ff` |
-| brand-50 | `#ecf3ff` |
-| brand-100 | `#dde9ff` |
-| brand-200 | `#c2d6ff` |
-| brand-300 | `#9cb9ff` |
-| brand-400 | `#7592ff` |
-| **brand-500** (primario) | **`#465fff`** |
-| brand-600 (hover) | `#3641f5` |
-| brand-700 | `#2a31d8` |
-| brand-800 | `#252dae` |
-| brand-900 | `#262e89` |
-| brand-950 | `#161950` |
+| brand-25 | `#f2f9f6` |
+| brand-50 | `#e6f4ee` |
+| brand-100 | `#cce8dc` |
+| brand-200 | `#99d2ba` |
+| brand-300 | `#66bb97` |
+| brand-400 | `#33a575` |
+| **brand-500** (primario) | **`#1b6b53`** |
+| brand-600 (hover) | `#155642` |
+| brand-700 | `#104333` |
+| brand-800 | `#0c3227` |
+| brand-900 | `#08221a` |
+| brand-950 | `#04120e` |
 
 ## Neutros (Gray) — Textos y fondos
 
