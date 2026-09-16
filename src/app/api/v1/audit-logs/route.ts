@@ -12,7 +12,7 @@ export async function GET(request: NextRequest) {
     const limit = parseInt(searchParams.get('limit') || '20');
     const userId = searchParams.get('userId');
     const action = searchParams.get('action');
-    const module = searchParams.get('module');
+    const moduleFilter = searchParams.get('module');
     const entityId = searchParams.get('entityId');
     const startDate = searchParams.get('startDate');
     const endDate = searchParams.get('endDate');
@@ -21,7 +21,7 @@ export async function GET(request: NextRequest) {
 
     if (userId) where.userId = parseInt(userId);
     if (action) where.action = action;
-    if (module) where.module = module;
+    if (moduleFilter) where.module = moduleFilter;
     if (entityId) where.entityId = entityId;
 
     if (startDate || endDate) {

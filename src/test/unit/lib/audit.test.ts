@@ -191,7 +191,9 @@ describe('Audit Module - Pure Functions', () => {
 });
 
 describe('Audit Module - createAuditLog', () => {
+  // eslint-disable-next-line @typescript-eslint/no-require-imports
   const { prisma } = require('@/lib/prisma');
+  // eslint-disable-next-line @typescript-eslint/no-require-imports
   const logger = require('@/lib/logger').default;
 
   beforeEach(() => {

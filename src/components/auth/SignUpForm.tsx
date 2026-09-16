@@ -89,7 +89,7 @@ export default function SignUpForm() {
                     onChange={(e) => setFirstName(e.target.value)}
                     placeholder="Tu nombre"
                     required
-                    className="w-full px-4 py-3 text-sm border rounded-lg bg-white dark:bg-boxdark border-gray-300 dark:border-strokedark focus:outline-none focus:ring-2 focus:ring-brand-500"
+                    className="w-full px-4 py-3 text-sm border rounded-lg bg-white dark:bg-boxdark border-gray-300 dark:border-strokedark focus:outline-none focus:ring-2 focus:ring-brand-500 dark:text-white"
                   />
                 </div>
                 <div>
@@ -102,7 +102,7 @@ export default function SignUpForm() {
                     onChange={(e) => setLastName(e.target.value)}
                     placeholder="Tu apellido"
                     required
-                    className="w-full px-4 py-3 text-sm border rounded-lg bg-white dark:bg-boxdark border-gray-300 dark:border-strokedark focus:outline-none focus:ring-2 focus:ring-brand-500"
+                    className="w-full px-4 py-3 text-sm border rounded-lg bg-white dark:bg-boxdark border-gray-300 dark:border-strokedark focus:outline-none focus:ring-2 focus:ring-brand-500 dark:text-white"
                   />
                 </div>
               </div>
@@ -116,7 +116,7 @@ export default function SignUpForm() {
                   onChange={(e) => setEmail(e.target.value)}
                   placeholder="correo@ejemplo.com"
                   required
-                  className="w-full px-4 py-3 text-sm border rounded-lg bg-white dark:bg-boxdark border-gray-300 dark:border-strokedark focus:outline-none focus:ring-2 focus:ring-brand-500"
+                  className="w-full px-4 py-3 text-sm border rounded-lg bg-white dark:bg-boxdark border-gray-300 dark:border-strokedark focus:outline-none focus:ring-2 focus:ring-brand-500 dark:text-white"
                 />
               </div>
               <div>
@@ -130,7 +130,7 @@ export default function SignUpForm() {
                     onChange={(e) => setPassword(e.target.value)}
                     placeholder="Mínimo 8 caracteres"
                     required
-                    className="w-full px-4 py-3 text-sm border rounded-lg bg-white dark:bg-boxdark border-gray-300 dark:border-strokedark focus:outline-none focus:ring-2 focus:ring-brand-500"
+                    className="w-full px-4 py-3 text-sm border rounded-lg bg-white dark:bg-boxdark border-gray-300 dark:border-strokedark focus:outline-none focus:ring-2 focus:ring-brand-500 dark:text-white"
                   />
                   <span
                     onClick={() => setShowPassword(!showPassword)}

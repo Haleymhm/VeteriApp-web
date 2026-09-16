@@ -1,6 +1,8 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import SpeciesBadge from "@/components/common/SpeciesBadge";
+import Sheet from "@/components/ui/drawer/Sheet";
 
 interface Owner {
   id: number;
@@ -207,78 +209,73 @@ export default function MascotasPage() {
     return labels[status];
   };
 
-  const getSpeciesIcon = (species: string) => {
-    const s = species.toLowerCase();
-    if (s.includes("perro")) return "🐕";
-    if (s.includes("gato")) return "🐈";
-    if (s.includes("ave") || s.includes("pájaro")) return "🐦";
-    if (s.includes("pez")) return "🐟";
-    if (s.includes("hamster") || s.includes("roedor")) return "🐹";
-    return "🐾";
-  };
-
   return (
-    <div>
-      <div className="flex flex-wrap items-center justify-between gap-3 mb-6">
-        <h2 className="text-xl font-semibold text-gray-800 dark:text-white/90">
-          Gestión de Mascotas
-        </h2>
+    <div className="space-y-6">
+      <div className="flex flex-wrap items-center justify-between gap-3">
+        <div>
+          <h1 className="text-2xl font-bold text-gray-900 dark:text-white">
+            Gestión de Mascotas
+          </h1>
+          <p className="text-sm text-gray-500 dark:text-gray-400 mt-0.5">
+            Registro clínico de pacientes, microchips y propietarios.
+          </p>
+        </div>
         <button
           onClick={() => setShowModal(true)}
-          className="px-4 py-2 text-sm font-medium text-white bg-brand-500 rounded-lg hover:bg-brand-600"
+          className="inline-flex items-center gap-2 px-4 py-2.5 text-sm font-semibold text-white bg-brand-500 rounded-xl hover:bg-brand-600 transition-colors shadow-theme-xs cursor-pointer"
         >
           + Nueva Mascota
         </button>
       </div>
 
-      <div className="mb-4">
+      <div>
         <input
           type="text"
-          placeholder="Buscar por nombre..."
+          placeholder="Buscar por nombre o microchip..."
           value={search}
           onChange={(e) => setSearch(e.target.value)}
-          className="px-4 py-2 text-sm border rounded-lg bg-white dark:bg-boxdark border-gray-300 dark:border-strokedark w-full max-w-xs"
+          className="px-4 py-2.5 text-sm border rounded-xl bg-white dark:bg-gray-900 border-gray-300 dark:border-gray-700 text-gray-900 dark:text-white w-full max-w-sm focus:outline-none focus:ring-2 focus:ring-brand-500/20 focus:border-brand-500 shadow-theme-xs"
         />
       </div>
 
-      <div className="rounded-sm border border-stroke bg-white shadow-default dark:border-strokedark dark:bg-boxgray">
+      <div className="rounded-2xl border border-gray-200/90 bg-white shadow-theme-xs dark:border-gray-800 dark:bg-gray-900 overflow-hidden">
         {loading ? (
-          <div className="p-6 text-center text-gray-500">Cargando...</div>
+          <div className="p-8 text-center text-sm text-gray-500 animate-pulse">Cargando pacientes...</div>
         ) : (
           <div className="overflow-x-auto">
             <table className="w-full">
               <thead>
-                <tr className="border-b border-stroke dark:border-strokedark">
-                  <th className="px-4 py-3 text-left text-sm font-medium text-gray-500 dark:text-gray-400">
+                <tr className="border-b border-gray-100 dark:border-gray-800 bg-gray-50/50 dark:bg-gray-800/30">
+                  <th className="px-5 py-3.5 text-left text-xs font-semibold tracking-wide uppercase text-gray-500 dark:text-gray-400">
                     Mascota
                   </th>
-                  <th className="px-4 py-3 text-left text-sm font-medium text-gray-500 dark:text-gray-400">
+                  <th className="px-5 py-3.5 text-left text-xs font-semibold tracking-wide uppercase text-gray-500 dark:text-gray-400">
                     Especie / Raza
                   </th>
-                  <th className="px-4 py-3 text-left text-sm font-medium text-gray-500 dark:text-gray-400">
+                  <th className="px-5 py-3.5 text-left text-xs font-semibold tracking-wide uppercase text-gray-500 dark:text-gray-400">
                     Sexo
                   </th>
-                  <th className="px-4 py-3 text-left text-sm font-medium text-gray-500 dark:text-gray-400">
+                  <th className="px-5 py-3.5 text-left text-xs font-semibold tracking-wide uppercase text-gray-500 dark:text-gray-400">
                     Estado Reprod.
                   </th>
-                  <th className="px-4 py-3 text-left text-sm font-medium text-gray-500 dark:text-gray-400">
+                  <th className="px-5 py-3.5 text-left text-xs font-semibold tracking-wide uppercase text-gray-500 dark:text-gray-400">
                     Microchip
                   </th>
-                  <th className="px-4 py-3 text-left text-sm font-medium text-gray-500 dark:text-gray-400">
+                  <th className="px-5 py-3.5 text-left text-xs font-semibold tracking-wide uppercase text-gray-500 dark:text-gray-400">
                     Propietario
                   </th>
-                  <th className="px-4 py-3 text-left text-sm font-medium text-gray-500 dark:text-gray-400">
+                  <th className="px-5 py-3.5 text-left text-xs font-semibold tracking-wide uppercase text-gray-500 dark:text-gray-400">
                     Peso
                   </th>
-                  <th className="px-4 py-3 text-right text-sm font-medium text-gray-500 dark:text-gray-400">
+                  <th className="px-5 py-3.5 text-right text-xs font-semibold tracking-wide uppercase text-gray-500 dark:text-gray-400">
                     Acciones
                   </th>
                 </tr>
               </thead>
-              <tbody>
+              <tbody className="divide-y divide-gray-100 dark:divide-gray-800">
                 {pets.length === 0 ? (
                   <tr>
-                    <td colSpan={8} className="px-4 py-6 text-center text-gray-500">
+                    <td colSpan={8} className="px-6 py-10 text-center text-sm text-gray-500 dark:text-gray-400">
                       No hay mascotas registradas
                     </td>
                   </tr>
@@ -286,47 +283,44 @@ export default function MascotasPage() {
                   pets.map((pet) => (
                     <tr
                       key={pet.id}
-                      className="border-b border-stroke dark:border-strokedark hover:bg-gray-50 dark:hover:bg-white/5"
+                      className="hover:bg-gray-50/70 dark:hover:bg-gray-800/30 transition-colors"
                     >
-                      <td className="px-4 py-3">
+                      <td className="px-5 py-4">
                         <div className="flex items-center gap-3">
-                          <span className="text-xl">{getSpeciesIcon(pet.species)}</span>
-                          <span className="text-sm font-medium text-gray-800 dark:text-white/90">
+                          <SpeciesBadge species={pet.species} variant="icon" />
+                          <span className="text-sm font-semibold text-gray-900 dark:text-white">
                             {pet.name}
                           </span>
                         </div>
                       </td>
-                      <td className="px-4 py-3 text-sm text-gray-500 dark:text-gray-400">
-                        <div>{pet.species}</div>
-                        {pet.breed && (
-                          <div className="text-xs text-gray-400">{pet.breed}</div>
-                        )}
+                      <td className="px-5 py-4 text-sm text-gray-600 dark:text-gray-300">
+                        <SpeciesBadge species={pet.species} variant="chip" showBreed={pet.breed} />
                       </td>
-                      <td className="px-4 py-3 text-sm text-gray-500 dark:text-gray-400">
+                      <td className="px-5 py-4 text-sm text-gray-600 dark:text-gray-400">
                         {getSexLabel(pet.sex)}
                       </td>
-                      <td className="px-4 py-3 text-sm text-gray-500 dark:text-gray-400">
+                      <td className="px-5 py-4 text-sm text-gray-600 dark:text-gray-400">
                         {getReproductiveStatusLabel(pet.reproductiveStatus)}
                       </td>
-                      <td className="px-4 py-3 text-sm font-mono text-gray-500 dark:text-gray-400">
-                        {pet.microchipNumber || "-"}
+                      <td className="px-5 py-4 text-sm font-mono text-gray-600 dark:text-gray-400">
+                        {pet.microchipNumber || "—"}
                       </td>
-                      <td className="px-4 py-3 text-sm text-gray-500 dark:text-gray-400">
+                      <td className="px-5 py-4 text-sm text-gray-600 dark:text-gray-300">
                         {pet.owner.firstName} {pet.owner.lastName}
                       </td>
-                      <td className="px-4 py-3 text-sm text-gray-500 dark:text-gray-400">
-                        {pet.weight ? `${pet.weight} kg` : "-"}
+                      <td className="px-5 py-4 text-sm text-gray-600 dark:text-gray-300">
+                        {pet.weight ? `${pet.weight} kg` : "—"}
                       </td>
-                      <td className="px-4 py-3 text-right">
+                      <td className="px-5 py-4 text-right">
                         <button
                           onClick={() => handleEdit(pet)}
-                          className="mr-2 text-sm text-blue-500 hover:text-blue-600"
+                          className="mr-3 text-xs font-medium text-brand-600 hover:text-brand-700 dark:text-brand-400 cursor-pointer"
                         >
                           Editar
                         </button>
                         <button
                           onClick={() => handleDelete(pet.id)}
-                          className="text-sm text-red-500 hover:text-red-600"
+                          className="text-xs font-medium text-rose-600 hover:text-rose-700 dark:text-rose-400 cursor-pointer"
                         >
                           Eliminar
                         </button>
@@ -340,180 +334,182 @@ export default function MascotasPage() {
         )}
       </div>
 
-      {showModal && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50">
-          <div className="w-full max-w-lg p-6 bg-white rounded-lg dark:bg-boxdark max-h-[90vh] overflow-y-auto">
-            <h3 className="mb-4 text-lg font-semibold text-gray-800 dark:text-white/90">
-              {editingPet ? "Editar Mascota" : "Nueva Mascota"}
-            </h3>
-            <form onSubmit={handleSubmit} className="space-y-4">
-              <div className="grid grid-cols-2 gap-4">
-                <div>
-                  <label className="block mb-1 text-sm font-medium text-gray-700 dark:text-gray-400">
-                    Nombre *
-                  </label>
-                  <input
-                    type="text"
-                    value={form.name}
-                    onChange={(e) => setForm({ ...form, name: e.target.value })}
-                    required
-                    className="w-full px-3 py-2 text-sm border rounded-lg bg-white dark:bg-boxdark border-gray-300 dark:border-strokedark"
-                  />
-                </div>
-                <div>
-                  <label className="block mb-1 text-sm font-medium text-gray-700 dark:text-gray-400">
-                    Número de Microchip
-                  </label>
-                  <input
-                    type="text"
-                    value={form.microchipNumber}
-                    onChange={(e) => setForm({ ...form, microchipNumber: e.target.value })}
-                    placeholder="Ej: ABC123456789"
-                    className="w-full px-3 py-2 text-sm border rounded-lg bg-white dark:bg-boxdark border-gray-300 dark:border-strokedark"
-                  />
-                </div>
-              </div>
-              <div className="grid grid-cols-2 gap-4">
-                <div>
-                  <label className="block mb-1 text-sm font-medium text-gray-700 dark:text-gray-400">
-                    Especie *
-                  </label>
-                  <select
-                    value={form.species}
-                    onChange={(e) => setForm({ ...form, species: e.target.value })}
-                    required
-                    className="w-full px-3 py-2 text-sm border rounded-lg bg-white dark:bg-boxdark border-gray-300 dark:border-strokedark"
-                  >
-                    <option value="">Seleccionar</option>
-                    <option value="Perro">Perro</option>
-                    <option value="Gato">Gato</option>
-                    <option value="Ave">Ave</option>
-                    <option value="Hamster">Hamster</option>
-                    <option value="Conejo">Conejo</option>
-                    <option value="Pez">Pez</option>
-                    <option value="Reptil">Reptil</option>
-                    <option value="Otro">Otro</option>
-                  </select>
-                </div>
-                <div>
-                  <label className="block mb-1 text-sm font-medium text-gray-700 dark:text-gray-400">
-                    Raza
-                  </label>
-                  <input
-                    type="text"
-                    value={form.breed}
-                    onChange={(e) => setForm({ ...form, breed: e.target.value })}
-                    className="w-full px-3 py-2 text-sm border rounded-lg bg-white dark:bg-boxdark border-gray-300 dark:border-strokedark"
-                  />
-                </div>
-              </div>
-              <div className="grid grid-cols-2 gap-4">
-                <div>
-                  <label className="block mb-1 text-sm font-medium text-gray-700 dark:text-gray-400">
-                    Sexo
-                  </label>
-                  <select
-                    value={form.sex}
-                    onChange={(e) => setForm({ ...form, sex: e.target.value as Sex | "" })}
-                    className="w-full px-3 py-2 text-sm border rounded-lg bg-white dark:bg-boxdark border-gray-300 dark:border-strokedark"
-                  >
-                    <option value="">Seleccionar</option>
-                    <option value="MALE">Macho</option>
-                    <option value="FEMALE">Hembra</option>
-                  </select>
-                </div>
-                <div>
-                  <label className="block mb-1 text-sm font-medium text-gray-700 dark:text-gray-400">
-                    Estado Reproductivo
-                  </label>
-                  <select
-                    value={form.reproductiveStatus}
-                    onChange={(e) => setForm({ ...form, reproductiveStatus: e.target.value as ReproductiveStatus | "" })}
-                    className="w-full px-3 py-2 text-sm border rounded-lg bg-white dark:bg-boxdark border-gray-300 dark:border-strokedark"
-                  >
-                    <option value="">Seleccionar</option>
-                    <option value="FERTILE">Fértil</option>
-                    <option value="STERILIZED">Esterilizado</option>
-                    <option value="CASTRATED">Castrado</option>
-                  </select>
-                </div>
-              </div>
-              <div className="grid grid-cols-2 gap-4">
-                <div>
-                  <label className="block mb-1 text-sm font-medium text-gray-700 dark:text-gray-400">
-                    Fecha de Nacimiento
-                  </label>
-                  <input
-                    type="date"
-                    value={form.birthDate}
-                    onChange={(e) =>
-                      setForm({ ...form, birthDate: e.target.value })
-                    }
-                    className="w-full px-3 py-2 text-sm border rounded-lg bg-white dark:bg-boxdark border-gray-300 dark:border-strokedark"
-                  />
-                </div>
-                <div>
-                  <label className="block mb-1 text-sm font-medium text-gray-700 dark:text-gray-400">
-                    Peso (kg)
-                  </label>
-                  <input
-                    type="number"
-                    step="0.1"
-                    value={form.weight}
-                    onChange={(e) => setForm({ ...form, weight: e.target.value })}
-                    className="w-full px-3 py-2 text-sm border rounded-lg bg-white dark:bg-boxdark border-gray-300 dark:border-strokedark"
-                  />
-                </div>
-              </div>
-              <div>
-                <label className="block mb-1 text-sm font-medium text-gray-700 dark:text-gray-400">
-                  Características Especiales
-                </label>
-                <textarea
-                  value={form.specialCharacteristics}
-                  onChange={(e) => setForm({ ...form, specialCharacteristics: e.target.value })}
-                  rows={3}
-                  placeholder="Ej: Alergias, condiciones médicas, comportamiento especial..."
-                  className="w-full px-3 py-2 text-sm border rounded-lg bg-white dark:bg-boxdark border-gray-300 dark:border-strokedark resize-none"
-                />
-              </div>
-              <div>
-                <label className="block mb-1 text-sm font-medium text-gray-700 dark:text-gray-400">
-                  Propietario *
-                </label>
-                <select
-                  value={form.ownerId}
-                  onChange={(e) => setForm({ ...form, ownerId: e.target.value })}
-                  required
-                  className="w-full px-3 py-2 text-sm border rounded-lg bg-white dark:bg-boxdark border-gray-300 dark:border-strokedark"
-                >
-                  <option value="">Seleccionar cliente</option>
-                  {clients.map((client) => (
-                    <option key={client.id} value={client.id}>
-                      {client.firstName} {client.lastName} ({client.email})
-                    </option>
-                  ))}
-                </select>
-              </div>
-              <div className="flex justify-end gap-3 pt-4">
-                <button
-                  type="button"
-                  onClick={resetForm}
-                  className="px-4 py-2 text-sm font-medium text-gray-700 border border-gray-300 rounded-lg hover:bg-gray-50 dark:text-gray-400 dark:border-strokedark dark:hover:bg-white/5"
-                >
-                  Cancelar
-                </button>
-                <button
-                  type="submit"
-                  className="px-4 py-2 text-sm font-medium text-white bg-brand-500 rounded-lg hover:bg-brand-600"
-                >
-                  {editingPet ? "Actualizar" : "Crear"}
-                </button>
-              </div>
-            </form>
+      <Sheet
+        isOpen={showModal}
+        onClose={resetForm}
+        title={editingPet ? "Editar Mascota" : "Registrar Nueva Mascota"}
+        description="Ingresa los antecedentes biomédicos y el propietario asignado."
+      >
+        <form onSubmit={handleSubmit} className="space-y-4">
+          <div className="grid grid-cols-2 gap-4">
+            <div>
+              <label className="block mb-1 text-xs font-semibold tracking-wide uppercase text-gray-500 dark:text-gray-400">
+                Nombre *
+              </label>
+              <input
+                type="text"
+                value={form.name}
+                onChange={(e) => setForm({ ...form, name: e.target.value })}
+                required
+                className="w-full px-3 py-2 text-sm border rounded-xl bg-white dark:bg-gray-900 border-gray-300 dark:border-gray-700 text-gray-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-brand-500/20 focus:border-brand-500"
+              />
+            </div>
+            <div>
+              <label className="block mb-1 text-xs font-semibold tracking-wide uppercase text-gray-500 dark:text-gray-400">
+                Microchip
+              </label>
+              <input
+                type="text"
+                value={form.microchipNumber}
+                onChange={(e) => setForm({ ...form, microchipNumber: e.target.value })}
+                placeholder="Ej: ABC123456789"
+                className="w-full px-3 py-2 text-sm border rounded-xl bg-white dark:bg-gray-900 border-gray-300 dark:border-gray-700 text-gray-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-brand-500/20 focus:border-brand-500 font-mono"
+              />
+            </div>
           </div>
-        </div>
-      )}
+          <div className="grid grid-cols-2 gap-4">
+            <div>
+              <label className="block mb-1 text-xs font-semibold tracking-wide uppercase text-gray-500 dark:text-gray-400">
+                Especie *
+              </label>
+              <select
+                value={form.species}
+                onChange={(e) => setForm({ ...form, species: e.target.value })}
+                required
+                className="w-full px-3 py-2 text-sm border rounded-xl bg-white dark:bg-gray-900 border-gray-300 dark:border-gray-700 text-gray-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-brand-500/20 focus:border-brand-500"
+              >
+                <option value="">Seleccionar</option>
+                <option value="Perro">Perro</option>
+                <option value="Gato">Gato</option>
+                <option value="Ave">Ave</option>
+                <option value="Hamster">Hamster</option>
+                <option value="Conejo">Conejo</option>
+                <option value="Pez">Pez</option>
+                <option value="Reptil">Reptil</option>
+                <option value="Otro">Otro</option>
+              </select>
+            </div>
+            <div>
+              <label className="block mb-1 text-xs font-semibold tracking-wide uppercase text-gray-500 dark:text-gray-400">
+                Raza
+              </label>
+              <input
+                type="text"
+                value={form.breed}
+                onChange={(e) => setForm({ ...form, breed: e.target.value })}
+                className="w-full px-3 py-2 text-sm border rounded-xl bg-white dark:bg-gray-900 border-gray-300 dark:border-gray-700 text-gray-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-brand-500/20 focus:border-brand-500"
+              />
+            </div>
+          </div>
+          <div className="grid grid-cols-2 gap-4">
+            <div>
+              <label className="block mb-1 text-xs font-semibold tracking-wide uppercase text-gray-500 dark:text-gray-400">
+                Sexo
+              </label>
+              <select
+                value={form.sex}
+                onChange={(e) => setForm({ ...form, sex: e.target.value as Sex | "" })}
+                className="w-full px-3 py-2 text-sm border rounded-xl bg-white dark:bg-gray-900 border-gray-300 dark:border-gray-700 text-gray-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-brand-500/20 focus:border-brand-500"
+              >
+                <option value="">Seleccionar</option>
+                <option value="MALE">Macho</option>
+                <option value="FEMALE">Hembra</option>
+              </select>
+            </div>
+            <div>
+              <label className="block mb-1 text-xs font-semibold tracking-wide uppercase text-gray-500 dark:text-gray-400">
+                Estado Reproductivo
+              </label>
+              <select
+                value={form.reproductiveStatus}
+                onChange={(e) =>
+                  setForm({
+                    ...form,
+                    reproductiveStatus: e.target.value as ReproductiveStatus | "",
+                  })
+                }
+                className="w-full px-3 py-2 text-sm border rounded-xl bg-white dark:bg-gray-900 border-gray-300 dark:border-gray-700 text-gray-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-brand-500/20 focus:border-brand-500"
+              >
+                <option value="">Seleccionar</option>
+                <option value="FERTILE">Fértil</option>
+                <option value="STERILIZED">Esterilizado/a</option>
+                <option value="CASTRATED">Castrado/a</option>
+              </select>
+            </div>
+          </div>
+          <div className="grid grid-cols-2 gap-4">
+            <div>
+              <label className="block mb-1 text-xs font-semibold tracking-wide uppercase text-gray-500 dark:text-gray-400">
+                Fecha de Nacimiento
+              </label>
+              <input
+                type="date"
+                value={form.birthDate}
+                onChange={(e) => setForm({ ...form, birthDate: e.target.value })}
+                className="w-full px-3 py-2 text-sm border rounded-xl bg-white dark:bg-gray-900 border-gray-300 dark:border-gray-700 text-gray-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-brand-500/20 focus:border-brand-500"
+              />
+            </div>
+            <div>
+              <label className="block mb-1 text-xs font-semibold tracking-wide uppercase text-gray-500 dark:text-gray-400">
+                Peso (kg)
+              </label>
+              <input
+                type="number"
+                step="0.01"
+                value={form.weight}
+                onChange={(e) => setForm({ ...form, weight: e.target.value })}
+                placeholder="Ej: 12.5"
+                className="w-full px-3 py-2 text-sm border rounded-xl bg-white dark:bg-gray-900 border-gray-300 dark:border-gray-700 text-gray-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-brand-500/20 focus:border-brand-500"
+              />
+            </div>
+          </div>
+          <div>
+            <label className="block mb-1 text-xs font-semibold tracking-wide uppercase text-gray-500 dark:text-gray-400">
+              Características Especiales / Alergias
+            </label>
+            <textarea
+              value={form.specialCharacteristics}
+              onChange={(e) => setForm({ ...form, specialCharacteristics: e.target.value })}
+              rows={3}
+              placeholder="Ej: Alergias alimentarias, reactivo con otros perros..."
+              className="w-full px-3 py-2 text-sm border rounded-xl bg-white dark:bg-gray-900 border-gray-300 dark:border-gray-700 text-gray-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-brand-500/20 focus:border-brand-500 resize-none"
+            />
+          </div>
+          <div>
+            <label className="block mb-1 text-xs font-semibold tracking-wide uppercase text-gray-500 dark:text-gray-400">
+              Propietario Asignado *
+            </label>
+            <select
+              value={form.ownerId}
+              onChange={(e) => setForm({ ...form, ownerId: e.target.value })}
+              required
+              className="w-full px-3 py-2 text-sm border rounded-xl bg-white dark:bg-gray-900 border-gray-300 dark:border-gray-700 text-gray-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-brand-500/20 focus:border-brand-500"
+            >
+              <option value="">Seleccionar cliente</option>
+              {clients.map((client) => (
+                <option key={client.id} value={client.id}>
+                  {client.firstName} {client.lastName} ({client.email})
+                </option>
+              ))}
+            </select>
+          </div>
+          <div className="flex justify-end gap-3 pt-4 border-t border-gray-100 dark:border-gray-800">
+            <button
+              type="button"
+              onClick={resetForm}
+              className="px-4 py-2 text-sm font-medium text-gray-700 dark:text-gray-300 border border-gray-300 dark:border-gray-700 rounded-xl hover:bg-gray-50 dark:hover:bg-gray-800 transition-colors"
+            >
+              Cancelar
+            </button>
+            <button
+              type="submit"
+              className="px-5 py-2 text-sm font-semibold text-white bg-brand-500 rounded-xl hover:bg-brand-600 transition-colors shadow-theme-xs"
+            >
+              {editingPet ? "Actualizar Mascota" : "Guardar Mascota"}
+            </button>
+          </div>
+        </form>
+      </Sheet>
     </div>
   );
 }

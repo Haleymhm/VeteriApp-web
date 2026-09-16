@@ -36,7 +36,7 @@ export default function HolidaysEditor() {
   }, []);
 
   useEffect(() => {
-    // eslint-disable-next-line react-hooks/set-state-in-effect
+     
     fetchHolidays();
   }, [fetchHolidays]);
 
@@ -143,7 +143,7 @@ export default function HolidaysEditor() {
                 onChange={(e) => setDate(e.target.value)}
                 required
                 min={new Date().toISOString().split("T")[0]}
-                className="w-full h-11 px-3 py-2 text-sm border rounded-lg bg-white dark:bg-gray-900 border-gray-300 dark:border-gray-700 focus:outline-none focus:ring-2 focus:ring-brand-500"
+                className="w-full h-11 px-3 py-2 text-sm border rounded-lg bg-white dark:bg-gray-900 border-gray-300 dark:border-gray-700 focus:outline-none focus:ring-2 focus:ring-brand-500 dark:text-white/90"
               />
             </div>
             <div>

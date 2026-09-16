@@ -244,7 +244,7 @@ export default function ComunasPage() {
             <h3 className="mb-4 text-lg font-semibold text-gray-800 dark:text-white/90">
               {editingComuna ? "Editar Comuna" : "Nueva Comuna"}
             </h3>
-            
+
             {error && (
               <div className="mb-4 p-3 rounded bg-red-50 text-red-500 text-sm dark:bg-red-950/20 dark:text-red-400 border border-red-200 dark:border-red-900">
                 {error}
@@ -260,7 +260,7 @@ export default function ComunasPage() {
                   value={form.regionId}
                   onChange={(e) => setForm({ ...form, regionId: e.target.value })}
                   required
-                  className="w-full px-3 py-2 text-sm border rounded-lg bg-white dark:bg-boxdark border-gray-300 dark:border-strokedark"
+                  className="w-full px-3 py-2 text-sm border rounded-lg bg-white dark:bg-boxdark border-gray-300 dark:border-strokedark dark:text-white/90"
                 >
                   <option value="">Seleccione una región</option>
                   {regions.map((region) => (
@@ -281,10 +281,10 @@ export default function ComunasPage() {
                   onChange={(e) => setForm({ ...form, code: e.target.value })}
                   required
                   placeholder="Ej: COM-13101"
-                  className="w-full px-3 py-2 text-sm border rounded-lg bg-white dark:bg-boxdark border-gray-300 dark:border-strokedark"
+                  className="w-full px-3 py-2 text-sm border rounded-lg bg-white dark:bg-boxdark border-gray-300 dark:border-strokedark dark:text-white/90"
                 />
               </div>
-              
+
               <div>
                 <label className="block mb-1 text-sm font-medium text-gray-700 dark:text-gray-400">
                   Nombre de la Comuna *
@@ -295,7 +295,7 @@ export default function ComunasPage() {
                   onChange={(e) => setForm({ ...form, name: e.target.value })}
                   required
                   placeholder="Ej: Santiago"
-                  className="w-full px-3 py-2 text-sm border rounded-lg bg-white dark:bg-boxdark border-gray-300 dark:border-strokedark"
+                  className="w-full px-3 py-2 text-sm border rounded-lg bg-white dark:bg-boxdark border-gray-300 dark:border-strokedark dark:text-white/90"
                 />
               </div>
 

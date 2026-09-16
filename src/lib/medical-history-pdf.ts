@@ -186,7 +186,7 @@ export const generateMedicalHistoryPDF = async (data: MedicalHistoryPDFData): Pr
       margin: { left: 20, right: 20 },
     });
 
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+     
     yPos = (doc as any).lastAutoTable.finalY + 15;
   }
 
@@ -212,7 +212,7 @@ export const generateMedicalHistoryPDF = async (data: MedicalHistoryPDFData): Pr
       margin: { left: 20, right: 20 },
     });
 
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+     
     yPos = (doc as any).lastAutoTable.finalY + 15;
   }
 
@@ -242,7 +242,7 @@ export const generateMedicalHistoryPDF = async (data: MedicalHistoryPDFData): Pr
       margin: { left: 20, right: 20 },
     });
 
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+     
     yPos = (doc as any).lastAutoTable.finalY + 15;
   }
 
@@ -274,7 +274,7 @@ export const generateMedicalHistoryPDF = async (data: MedicalHistoryPDFData): Pr
       margin: { left: 20, right: 20 },
     });
 
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+     
     yPos = (doc as any).lastAutoTable.finalY + 15;
   }
 

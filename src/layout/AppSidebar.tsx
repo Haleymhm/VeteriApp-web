@@ -18,6 +18,13 @@ import {
   UserCircleIcon,
 } from "../icons/index";
 import SidebarWidget from "./SidebarWidget";
+import {
+  PawIcon,
+  OwnerIcon,
+  MedicalClipboardIcon,
+  ShieldAuditIcon,
+  MapPinIcon,
+} from "@/icons/veterinary";
 
 type NavItem = {
   name: string;
@@ -39,17 +46,17 @@ const navItems: NavItem[] = [
     path: "/calendar",
   },
   {
-    icon: <ListIcon />,
+    icon: <OwnerIcon className="w-5 h-5" />,
     name: "Clientes",
     path: "/clientes",
   },
   {
-    icon: <TableIcon />,
+    icon: <PawIcon className="w-5 h-5" />,
     name: "Mascotas",
     path: "/mascotas",
   },
   {
-    icon: <PageIcon />,
+    icon: <MedicalClipboardIcon className="w-5 h-5" />,
     name: "Historial Médico",
     path: "/historial-medico",
   },
@@ -63,13 +70,13 @@ const othersItems: NavItem[] = [
     adminOnly: true,
   },
   {
-    icon: <GridIcon />,
+    icon: <MapPinIcon className="w-5 h-5" />,
     name: "Regiones",
     path: "/regiones",
     adminOnly: true,
   },
   {
-    icon: <PlugInIcon />,
+    icon: <MapPinIcon className="w-5 h-5" />,
     name: "Comunas",
     path: "/comunas",
     adminOnly: true,
@@ -81,13 +88,13 @@ const othersItems: NavItem[] = [
     adminOnly: true,
   },
   {
-    icon: <BoxCubeIcon />,
+    icon: <UserCircleIcon />,
     name: "Mi Perfil",
     path: "/profile",
     adminOnly: true,
   },
   {
-    icon: <TableIcon />,
+    icon: <ShieldAuditIcon className="w-5 h-5" />,
     name: "Registro de Auditoría",
     path: "/audit-logs",
     adminOnly: true,
@@ -290,7 +297,7 @@ const AppSidebar: React.FC = () => {
 
     // If no submenu item matches, close the open submenu
     if (!submenuMatched) {
-      // eslint-disable-next-line react-hooks/set-state-in-effect
+       
       setOpenSubmenu(null);
     }
   }, [pathname,isActive]);

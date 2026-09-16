@@ -88,7 +88,7 @@ const AppHeader: React.FC = () => {
               width={154}
               height={32}
               className="dark:hidden"
-              src="./images/logo/logo.svg"
+              src="/images/logo/logo.svg"
               alt="Logo"
               style={{ width: 'auto', height: 'auto' }}
             />
@@ -96,7 +96,7 @@ const AppHeader: React.FC = () => {
               width={154}
               height={32}
               className="hidden dark:block"
-              src="./images/logo/logo-dark.svg"
+              src="/images/logo/logo-dark.svg"
               alt="Logo"
               style={{ width: 'auto', height: 'auto' }}
             />

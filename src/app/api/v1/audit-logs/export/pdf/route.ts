@@ -12,7 +12,7 @@ export async function GET(request: NextRequest) {
     const endDate = searchParams.get('endDate') || new Date().toISOString();
     const userId = searchParams.get('userId');
     const action = searchParams.get('action');
-    const module = searchParams.get('module');
+    const moduleFilter = searchParams.get('module');
 
     const where: Record<string, unknown> = {
       timestamp: {
@@ -23,7 +23,7 @@ export async function GET(request: NextRequest) {
 
     if (userId) where.userId = parseInt(userId);
     if (action) where.action = action;
-    if (module) where.module = module;
+    if (moduleFilter) where.module = moduleFilter;
 
     const logs = await prisma.auditLog.findMany({
       where,

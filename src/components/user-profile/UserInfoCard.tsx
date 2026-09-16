@@ -55,7 +55,7 @@ export default function UserInfoCard() {
   }, []);
 
   useEffect(() => {
-    // eslint-disable-next-line react-hooks/set-state-in-effect
+     
     fetchUser();
   }, [fetchUser]);
 
