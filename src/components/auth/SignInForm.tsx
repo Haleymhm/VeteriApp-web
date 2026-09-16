@@ -123,7 +123,7 @@ export default function SignInForm() {
               </div>
             </div>
           </form>
-          <div className="mt-5">
+          <div className="mt-5 mb-5">
             <p className="text-sm font-normal text-center text-gray-700 dark:text-gray-400 sm:text-start">
               ¿No tienes cuenta?{" "}
               <Link
@@ -133,6 +133,25 @@ export default function SignInForm() {
                 Regístrate aquí
               </Link>
             </p>
+          </div>
+
+          <div className="p-10 text-sm text-gray-500 bg-gray-100 rounded-lg dark:bg-gray-900/20">
+            <p className="font-semibold text-gray-700 dark:text-gray-300">Credenciales de prueba:</p>
+            <div className="mt-2 space-y-1">
+              <p><strong>Correo:</strong> administrator@veteriapp.dev</p>
+              <p><strong>Contraseña:</strong> Admin123456789</p>
+              <p><strong>Rol:</strong> ADMINISTRATOR</p>
+            </div>
+            <div className="mt-2 space-y-1">
+              <p><strong>Correo:</strong> veterinarian@veteriapp.dev</p>
+              <p><strong>Contraseña:</strong> Admin123456789</p>
+              <p><strong>Rol:</strong> VETERINARIAN</p>
+            </div>
+            <div className="mt-2 space-y-1">
+              <p><strong>Correo:</strong> owner@veteriapp.dev</p>
+              <p><strong>Contraseña:</strong> Admin123456789</p>
+              <p><strong>Rol:</strong> CLIENT</p>
+            </div>
           </div>
         </div>
       </div>
