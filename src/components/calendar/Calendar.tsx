@@ -12,18 +12,18 @@ import { useCalendarContext } from "./CalendarContext";
 import styles from "./Calendar.module.css";
 
 interface Vet {
-  id: number;
+  id: string;
   firstName: string;
   lastName: string;
   email: string;
 }
 
 interface Pet {
-  id: number;
+  id: string;
   name: string;
   species: string;
   owner: {
-    id: number;
+    id: string;
     firstName: string;
     lastName: string;
     email: string;
@@ -31,13 +31,13 @@ interface Pet {
 }
 
 export interface Appointment {
-  id: number;
+  id: string;
   date: string;
   reason: string;
   status: string;
   notes: string | null;
-  petId: number;
-  vetId: number | null;
+  petId: string;
+  vetId: string | null;
   categoryId: string;
   pet: Pet;
   vet: Vet | null;
@@ -172,7 +172,7 @@ export default function Calendar({ onOpenCreateModal, onOpenPendingModal, extern
   };
 
   const events: EventInput[] = appointments.map((apt) => ({
-    id: apt.id.toString(),
+    id: apt.id,
     title: `${apt.category?.name || "Sin categoría"}: ${apt.pet?.name} - ${apt.reason}`,
     start: apt.date,
     backgroundColor: `${apt.category?.color || "#6b7280"}15`,
@@ -240,8 +240,8 @@ export default function Calendar({ onOpenCreateModal, onOpenPendingModal, extern
       date: dateTime,
       reason: form.reason,
       categoryId: form.categoryId,
-      petId: parseInt(form.petId),
-      vetId: form.vetId ? parseInt(form.vetId) : null,
+      petId: form.petId,
+      vetId: form.vetId || null,
       notes: form.notes || null,
       status: "CONFIRMED",
     };
@@ -266,7 +266,7 @@ export default function Calendar({ onOpenCreateModal, onOpenPendingModal, extern
     }
   };
 
-  const handleStatusChange = async (id: number, newStatus: string) => {
+  const handleStatusChange = async (id: string, newStatus: string) => {
     try {
       const res = await fetch(`/api/v1/appointments/${id}`, {
         method: "PUT",
@@ -286,7 +286,7 @@ export default function Calendar({ onOpenCreateModal, onOpenPendingModal, extern
     }
   };
 
-  const handleDelete = async (id: number) => {
+  const handleDelete = async (id: string) => {
     if (!confirm("¿Está seguro de eliminar esta cita?")) return;
 
     try {

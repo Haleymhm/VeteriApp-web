@@ -115,7 +115,7 @@ export async function proxy(request: NextRequest) {
     }
 
     const response = NextResponse.next();
-    response.headers.set('x-user-id', session.userId.toString());
+    response.headers.set('x-user-id', session.userId);
     response.headers.set('x-user-role', session.role);
     response.headers.set('x-user-email', session.email);
     response.headers.set('x-user-name', `${session.firstName} ${session.lastName}`);

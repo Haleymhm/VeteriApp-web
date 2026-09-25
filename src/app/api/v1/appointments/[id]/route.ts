@@ -19,7 +19,7 @@ export async function GET(
 
     const { id } = await params;
     const appointment = await prisma.appointment.findUnique({
-      where: { id: parseInt(id) },
+      where: { id },
       include: {
         category: true,
         pet: {
@@ -87,7 +87,7 @@ export async function PUT(
     const { date, reason, status, notes, vetId, petId, categoryId } = validation.data;
 
     const existingAppointment = await prisma.appointment.findUnique({
-      where: { id: parseInt(id) },
+      where: { id },
     });
 
     if (!existingAppointment) {
@@ -109,8 +109,8 @@ export async function PUT(
       reason?: string;
       status?: AppointmentStatus;
       notes?: string | null;
-      vetId?: number | null;
-      petId?: number;
+      vetId?: string | null;
+      petId?: string;
       categoryId?: string;
     } = {};
 
@@ -132,7 +132,7 @@ export async function PUT(
     if (updateData.vetId && updateData.date) {
       const conflict = await prisma.appointment.findFirst({
         where: {
-          id: { not: parseInt(id) },
+          id: { not: id },
           vetId: updateData.vetId,
           date: updateData.date,
           status: { in: ['PENDING', 'CONFIRMED'] },
@@ -145,7 +145,7 @@ export async function PUT(
     }
 
     const appointment = await prisma.appointment.update({
-      where: { id: parseInt(id) },
+      where: { id },
       data: updateData,
       include: {
         category: true,
@@ -238,7 +238,7 @@ export async function DELETE(
     const { id } = await params;
 
     const existing = await prisma.appointment.findUnique({
-      where: { id: parseInt(id) },
+      where: { id },
     });
 
     if (!existing) {
@@ -256,7 +256,7 @@ export async function DELETE(
     });
 
     await prisma.appointment.delete({
-      where: { id: parseInt(id) },
+      where: { id },
     });
 
     return successResponse(null, 'Cita eliminada exitosamente');

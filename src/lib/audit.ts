@@ -12,7 +12,7 @@ export interface FieldChange {
 }
 
 interface UserInfo {
-  userId: number;
+  userId: string;
   firstName: string;
   lastName: string;
   email: string;

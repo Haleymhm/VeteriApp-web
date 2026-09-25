@@ -3,7 +3,7 @@ import crypto from 'crypto';
 const AUDIT_SECRET_KEY = process.env.AUDIT_SECRET_KEY || 'default-dev-key-change-in-production';
 
 export interface AuditLogData {
-  userId: number;
+  userId: string;
   userFullName: string;
   userEmail: string;
   action: string;

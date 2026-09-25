@@ -15,7 +15,7 @@ export async function GET(
     const { id } = await params;
 
     const client = await prisma.user.findFirst({
-      where: { id: parseInt(id), role: 'CLIENT' },
+      where: { id, role: 'CLIENT' },
       select: {
         id: true,
         email: true,
@@ -87,7 +87,7 @@ export async function PUT(
     const { firstName, lastName, email, password, rut, phone, address, regionId, comunaId } = validation.data;
 
     const existingClient = await prisma.user.findUnique({
-      where: { id: parseInt(id) },
+      where: { id },
     });
 
     if (!existingClient) {
@@ -129,7 +129,7 @@ export async function PUT(
     if (password) data.password = await bcrypt.hash(password, 10);
 
     const client = await prisma.user.update({
-      where: { id: parseInt(id), role: 'CLIENT' },
+      where: { id, role: 'CLIENT' },
       data,
       select: {
         id: true,
@@ -179,7 +179,7 @@ export async function DELETE(
     const { id } = await params;
 
     const existing = await prisma.user.findUnique({
-      where: { id: parseInt(id) },
+      where: { id },
     });
 
     if (!existing) {
@@ -197,7 +197,7 @@ export async function DELETE(
     });
 
     await prisma.user.delete({
-      where: { id: parseInt(id), role: 'CLIENT' },
+      where: { id, role: 'CLIENT' },
     });
 
     return successResponse(null, 'Cliente eliminado exitosamente');

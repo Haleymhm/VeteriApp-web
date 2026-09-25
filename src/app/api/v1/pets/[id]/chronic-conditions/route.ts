@@ -17,7 +17,7 @@ export async function GET(
 
     const { id } = await params;
     const pet = await prisma.pet.findUnique({
-      where: { id: parseInt(id) },
+      where: { id },
       select: { id: true, ownerId: true },
     });
 
@@ -30,7 +30,7 @@ export async function GET(
     }
 
     const conditions = await prisma.chronicCondition.findMany({
-      where: { petId: parseInt(id) },
+      where: { petId: id },
       orderBy: { createdAt: 'desc' },
     });
 
@@ -67,7 +67,7 @@ export async function POST(
     const { name, type, severity, diagnosisDate, notes, isActive } = validation.data;
 
     const pet = await prisma.pet.findUnique({
-      where: { id: parseInt(id) },
+      where: { id },
     });
 
     if (!pet) {
@@ -81,7 +81,7 @@ export async function POST(
       diagnosisDate: diagnosisDate ?? null,
       notes: notes || null,
       isActive: isActive !== undefined ? isActive : true,
-      petId: parseInt(id),
+      petId: id,
     };
 
     const condition = await prisma.chronicCondition.create({

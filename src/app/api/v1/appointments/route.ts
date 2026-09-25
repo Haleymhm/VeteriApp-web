@@ -25,16 +25,16 @@ export async function GET(request: NextRequest) {
 
     const where: {
       status?: AppointmentStatus;
-      vetId?: number;
-      petId?: number | { in: number[] };
+      vetId?: string;
+      petId?: string | { in: string[] };
       date?: { gte?: Date; lte?: Date };
     } = {};
 
     if (status) where.status = status;
 
-    if (vetId) where.vetId = parseInt(vetId);
+    if (vetId) where.vetId = vetId;
 
-    if (petId) where.petId = parseInt(petId);
+    if (petId) where.petId = petId;
 
     if (dateFrom && dateTo) {
       where.date = {

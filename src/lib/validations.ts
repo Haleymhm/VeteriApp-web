@@ -124,9 +124,9 @@ const DateInputNullable = z
   )
   .transform((value) => (value === null ? null : new Date(value)));
 
-const OwnerIdInput = z
-  .union([z.number().int().positive(), z.string().regex(/^\d+$/, 'ownerId inválido')])
-  .transform((value) => Number(value));
+export const UuidParamSchema = z.string().uuid('ID inválido');
+
+const OwnerIdInput = z.string().uuid('ownerId inválido');
 
 export const CreatePetSchema = z.object({
   name: z.string().min(1, 'Nombre es requerido'),
@@ -157,8 +157,8 @@ export const CreateAppointmentSchema = z.object({
   date: DateInputRequired,
   reason: z.string().min(1, 'Motivo es requerido'),
   categoryId: z.string().uuid('ID de categoría inválido'),
-  petId: z.number().int().positive('ID de mascota inválido'),
-  vetId: z.number().int().positive().optional(),
+  petId: z.string().uuid('ID de mascota inválido'),
+  vetId: z.string().uuid('ID de veterinario inválido').optional(),
   notes: z.string().optional(),
   status: AppointmentStatus.optional(),
 });
@@ -168,8 +168,8 @@ export const UpdateAppointmentSchema = z.object({
   reason: z.string().min(1, 'Motivo es requerido').optional(),
   status: AppointmentStatus.optional(),
   notes: z.string().nullable().optional(),
-  vetId: z.number().int().positive().nullable().optional(),
-  petId: z.number().int().positive().optional(),
+  vetId: z.string().uuid('ID de veterinario inválido').nullable().optional(),
+  petId: z.string().uuid('ID de mascota inválido').optional(),
   categoryId: z.string().uuid('ID de categoría inválido').optional(),
 });
 
@@ -180,7 +180,7 @@ export const CreateMedicalRecordSchema = z.object({
   treatment: z.string().optional(),
   publicNotes: z.string().min(1, 'Notas públicas son requeridas'),
   privateNotes: z.string().optional(),
-  petId: z.number().int().positive('ID de mascota inválido'),
+  petId: z.string().uuid('ID de mascota inválido'),
   vitals: VitalSignsSchema.optional(),
 });
 

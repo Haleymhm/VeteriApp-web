@@ -17,7 +17,7 @@ export async function GET(
 
     const { id } = await params;
     const pet = await prisma.pet.findUnique({
-      where: { id: parseInt(id) },
+      where: { id },
       include: {
         owner: {
           select: {
@@ -75,7 +75,7 @@ export async function PUT(
     const { name, species, breed, birthDate, weight, sex, reproductiveStatus, specialCharacteristics, microchipNumber } = validation.data;
 
     const existingPet = await prisma.pet.findUnique({
-      where: { id: parseInt(id) },
+      where: { id },
     });
 
     if (!existingPet) {
@@ -121,7 +121,7 @@ export async function PUT(
     if (microchipNumber !== undefined) data.microchipNumber = microchipNumber;
 
     const pet = await prisma.pet.update({
-      where: { id: parseInt(id) },
+      where: { id },
       data,
       include: {
         owner: {
@@ -172,7 +172,7 @@ export async function DELETE(
     const { id } = await params;
 
     const existing = await prisma.pet.findUnique({
-      where: { id: parseInt(id) },
+      where: { id },
     });
 
     if (!existing) {
@@ -190,7 +190,7 @@ export async function DELETE(
     });
 
     await prisma.pet.delete({
-      where: { id: parseInt(id) },
+      where: { id },
     });
 
     return successResponse(null, 'Mascota eliminada exitosamente');

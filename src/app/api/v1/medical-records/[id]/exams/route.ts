@@ -17,7 +17,7 @@ export async function GET(
 
     const { id } = await params;
     const medicalRecord = await prisma.medicalRecord.findUnique({
-      where: { id: parseInt(id) },
+      where: { id },
       select: { id: true, petId: true, pet: { select: { ownerId: true } } },
     });
 
@@ -30,7 +30,7 @@ export async function GET(
     }
 
     const exams = await prisma.examAttachment.findMany({
-      where: { medicalRecordId: parseInt(id) },
+      where: { medicalRecordId: id },
       orderBy: { createdAt: 'desc' },
     });
 
@@ -67,7 +67,7 @@ export async function POST(
     const { fileName, fileUrl, fileType, description } = validation.data;
 
     const medicalRecord = await prisma.medicalRecord.findUnique({
-      where: { id: parseInt(id) },
+      where: { id },
     });
 
     if (!medicalRecord) {
@@ -83,7 +83,7 @@ export async function POST(
       fileUrl,
       fileType,
       description: description || null,
-      medicalRecordId: parseInt(id),
+      medicalRecordId: id,
     };
 
     const exam = await prisma.examAttachment.create({

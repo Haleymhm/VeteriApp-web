@@ -12,7 +12,7 @@ const resend = new Resend(process.env.RESEND_API_KEY);
 const TEST_DOMAIN = 'resend.dev';
 
 interface AppointmentEmailData {
-  id: number;
+  id: string;
   date: Date;
   reason: string;
   status: 'PENDING' | 'CONFIRMED' | 'COMPLETED' | 'CANCELLED' | 'NO_SHOW';

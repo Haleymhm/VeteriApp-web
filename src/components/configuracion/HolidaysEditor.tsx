@@ -5,7 +5,7 @@ import Label from "../form/Label";
 import Input from "../form/input/InputField";
 
 interface Holiday {
-  id: number;
+  id: string;
   date: string;
   label: string;
   createdAt: string;
@@ -71,7 +71,7 @@ export default function HolidaysEditor() {
     }
   };
 
-  const handleDelete = async (id: number) => {
+  const handleDelete = async (id: string) => {
     if (!confirm("¿Eliminar este feriado?")) return;
     try {
       const res = await fetch(`/api/v1/configuracion/holidays/${id}`, {

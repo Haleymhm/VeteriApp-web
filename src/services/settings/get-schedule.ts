@@ -40,7 +40,7 @@ export async function getSchedule(): Promise<WeeklySchedule> {
   return DEFAULT_SCHEDULE;
 }
 
-export async function saveSchedule(schedule: WeeklySchedule, updatedById?: number) {
+export async function saveSchedule(schedule: WeeklySchedule, updatedById?: string) {
   await prisma.clinicSetting.upsert({
     where: { key: 'schedule' },
     update: {

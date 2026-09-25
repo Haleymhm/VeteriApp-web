@@ -11,7 +11,7 @@ import Badge from "../ui/badge/Badge";
 import Image from "next/image";
 
 interface Order {
-  id: number;
+  id: string;
   user: {
     image: string;
     name: string;

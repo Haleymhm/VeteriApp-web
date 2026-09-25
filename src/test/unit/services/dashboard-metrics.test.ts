@@ -44,9 +44,9 @@ function asPrisma(mock: PrismaMock): Parameters<typeof computeDashboardMetrics>[
   return mock as unknown as Parameters<typeof computeDashboardMetrics>[0];
 }
 
-const adminUser: DashboardUser = { userId: 1, role: 'ADMIN', firstName: 'Admin', lastName: 'Root', email: 'admin@test.com' };
-const vetUser: DashboardUser = { userId: 7, role: 'VET', firstName: 'Ana', lastName: 'Vet', email: 'ana@test.com' };
-const receptUser: DashboardUser = { userId: 3, role: 'RECEPTIONIST', firstName: 'Re', lastName: 'Cep', email: 'r@test.com' };
+const adminUser: DashboardUser = { userId: 'a0000000-0000-0000-0000-000000000001', role: 'ADMIN', firstName: 'Admin', lastName: 'Root', email: 'admin@test.com' };
+const vetUser: DashboardUser = { userId: 'a0000000-0000-0000-0000-000000000007', role: 'VET', firstName: 'Ana', lastName: 'Vet', email: 'ana@test.com' };
+const receptUser: DashboardUser = { userId: 'a0000000-0000-0000-0000-000000000003', role: 'RECEPTIONIST', firstName: 'Re', lastName: 'Cep', email: 'r@test.com' };
 
 describe('dashboard-metrics service', () => {
   describe('getRangeDates', () => {

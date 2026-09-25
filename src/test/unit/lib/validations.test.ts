@@ -331,7 +331,7 @@ describe('Validations - Pet Schemas', () => {
     reproductiveStatus: 'FERTILE' as const,
     specialCharacteristics: 'Muy juguetón',
     microchipNumber: '123456789012345',
-    ownerId: 1,
+    ownerId: 'a0000000-0000-0000-0000-000000000001',
   };
 
   describe('CreatePetSchema', () => {
@@ -390,17 +390,15 @@ describe('Validations - Pet Schemas', () => {
       expect(result.success).toBe(false);
     });
 
-    it('should accept ownerId as number and as numeric string', () => {
-      const numeric = CreatePetSchema.safeParse({ ...validPet, ownerId: 1 });
-      const stringified = CreatePetSchema.safeParse({ ...validPet, ownerId: '1' });
-      expect(numeric.success).toBe(true);
-      expect(stringified.success).toBe(true);
-      if (numeric.success && stringified.success) {
-        expect(stringified.data.ownerId).toBe(1);
+    it('should accept ownerId as a valid UUID string', () => {
+      const result = CreatePetSchema.safeParse({ ...validPet, ownerId: 'a0000000-0000-0000-0000-000000000001' });
+      expect(result.success).toBe(true);
+      if (result.success) {
+        expect(result.data.ownerId).toBe('a0000000-0000-0000-0000-000000000001');
       }
     });
 
-    it('should reject non-numeric ownerId string', () => {
+    it('should reject non-UUID ownerId string', () => {
       const result = CreatePetSchema.safeParse({ ...validPet, ownerId: 'abc' });
       expect(result.success).toBe(false);
     });

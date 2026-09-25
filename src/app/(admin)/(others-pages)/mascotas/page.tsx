@@ -5,7 +5,7 @@ import SpeciesBadge from "@/components/common/SpeciesBadge";
 import Sheet from "@/components/ui/drawer/Sheet";
 
 interface Owner {
-  id: number;
+  id: string;
   firstName: string;
   lastName: string;
   email: string;
@@ -15,7 +15,7 @@ type Sex = "MALE" | "FEMALE";
 type ReproductiveStatus = "FERTILE" | "STERILIZED" | "CASTRATED";
 
 interface Pet {
-  id: number;
+  id: string;
   name: string;
   species: string;
   breed: string | null;
@@ -38,7 +38,7 @@ interface ApiResponse {
 }
 
 interface Client {
-  id: number;
+  id: string;
   firstName: string;
   lastName: string;
   email: string;
@@ -158,12 +158,12 @@ export default function MascotasPage() {
       reproductiveStatus: pet.reproductiveStatus || "",
       specialCharacteristics: pet.specialCharacteristics || "",
       microchipNumber: pet.microchipNumber || "",
-      ownerId: pet.owner.id.toString(),
+      ownerId: pet.owner.id,
     });
     setShowModal(true);
   };
 
-  const handleDelete = async (id: number) => {
+  const handleDelete = async (id: string) => {
     if (!confirm("¿Está seguro de eliminar esta mascota?")) return;
 
     try {

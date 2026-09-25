@@ -6,7 +6,7 @@ export const JWT_SECRET = new TextEncoder().encode(
 );
 
 export interface JWTPayload {
-  userId: number;
+  userId: string;
   email: string;
   role: Role;
   firstName: string;

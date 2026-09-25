@@ -4,7 +4,7 @@ import { useRouter, usePathname } from "next/navigation";
 import Link from "next/link";
 
 interface UserData {
-  userId: number;
+  userId: string;
   email: string;
   firstName: string;
   lastName: string;
