@@ -3,7 +3,7 @@ import { prisma } from './prisma';
 import type { Role } from '@prisma/client';
 
 interface AuthUser {
-  userId: number;
+  userId: string;
   role: Role;
   email: string;
   firstName: string;
@@ -19,7 +19,7 @@ export async function getCurrentUser(): Promise<AuthUser | null> {
   if (!userId || !role) return null;
 
   return {
-    userId: parseInt(userId),
+    userId,
     role,
     email: email || '',
     firstName: '',
@@ -51,7 +51,7 @@ export async function requireStaff(): Promise<AuthUser> {
   return requireRole(['ADMIN', 'VET', 'RECEPTIONIST']);
 }
 
-export async function getUserById(id: number) {
+export async function getUserById(id: string) {
   return prisma.user.findUnique({
     where: { id },
     select: {

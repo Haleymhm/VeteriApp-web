@@ -17,7 +17,7 @@ export async function GET(
 
     const { id } = await params;
     const pet = await prisma.pet.findUnique({
-      where: { id: parseInt(id) },
+      where: { id },
       select: { id: true, ownerId: true },
     });
 
@@ -30,7 +30,7 @@ export async function GET(
     }
 
     const vaccinations = await prisma.vaccination.findMany({
-      where: { petId: parseInt(id) },
+      where: { petId: id },
       orderBy: { administrationDate: 'desc' },
     });
 
@@ -67,7 +67,7 @@ export async function POST(
     const { vaccineName, vaccineType, administrationDate, nextDoseDate, lotNumber, manufacturer} = validation.data;
 
     const pet = await prisma.pet.findUnique({
-      where: { id: parseInt(id) },
+      where: { id },
     });
 
     if (!pet) {
@@ -82,7 +82,7 @@ export async function POST(
       lotNumber: lotNumber || null,
       manufacturer: manufacturer || null,
       //veterinarian: user.userId || null,
-      petId: parseInt(id),
+      petId: id,
       createdById: user.userId,
     };
 

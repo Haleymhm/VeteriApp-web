@@ -6,15 +6,15 @@ import { generateMedicalHistoryPDF } from "@/lib/medical-history-pdf";
 type DewormingType = "INTERNAL" | "EXTERNAL" | "BOTH";
 
 interface Pet {
-  id: number;
+  id: string;
   name: string;
   species: string;
   breed: string | null;
-  owner: { id: number; firstName: string; lastName: string; email: string };
+  owner: { id: string; firstName: string; lastName: string; email: string };
 }
 
 interface VitalSigns {
-  id: number;
+  id: string;
   weight: number | null;
   temperature: number | null;
   heartRate: number | null;
@@ -25,7 +25,7 @@ interface VitalSigns {
 }
 
 interface ExamAttachment {
-  id: number;
+  id: string;
   fileName: string;
   fileUrl: string;
   fileType: string;
@@ -34,24 +34,24 @@ interface ExamAttachment {
 }
 
 interface MedicalRecord {
-  id: number;
+  id: string;
   date: string;
   title: string;
   diagnosis: string | null;
   treatment: string | null;
   publicNotes: string;
   privateNotes: string | null;
-  petId: number;
-  vetId: number;
-  pet: { id: number; name: string; species: string };
-  vet: { id: number; firstName: string; lastName: string };
+  petId: string;
+  vetId: string;
+  pet: { id: string; name: string; species: string };
+  vet: { id: string; firstName: string; lastName: string };
   vitals: VitalSigns | null;
   exams: ExamAttachment[];
   createdAt: string;
 }
 
 interface Vaccination {
-  id: number;
+  id: string;
   vaccineName: string;
   vaccineType: string;
   administrationDate: string;
@@ -59,41 +59,41 @@ interface Vaccination {
   lotNumber: string | null;
   manufacturer: string | null;
   veterinarian: string | null;
-  petId: number;
+  petId: string;
   createdAt: string;
 }
 
 interface Deworming {
-  id: number;
+  id: string;
   productName: string;
   type: DewormingType;
   dosage: string | null;
   date: string;
   nextDate: string | null;
-  petId: number;
+  petId: string;
   createdAt: string;
 }
 
 interface SurgicalHistory {
-  id: number;
+  id: string;
   procedure: string;
   date: string | null;
   complications: string | null;
   notes: string | null;
   outcomes: string | null;
-  petId: number;
+  petId: string;
   createdAt: string;
 }
 
 interface ChronicCondition {
-  id: number;
+  id: string;
   name: string;
   type: string;
   severity: string | null;
   diagnosisDate: string | null;
   notes: string | null;
   isActive: boolean;
-  petId: number;
+  petId: string;
   createdAt: string;
 }
 
@@ -107,7 +107,7 @@ const dewormingTypeLabels: Record<DewormingType, string> = {
 
 export default function HistorialMedicoPage() {
   const [pets, setPets] = useState<Pet[]>([]);
-  const [selectedPetId, setSelectedPetId] = useState<number | null>(null);
+  const [selectedPetId, setSelectedPetId] = useState<string | null>(null);
   const [activeTab, setActiveTab] = useState<TabType>("resumen");
   const [showModal, setShowModal] = useState(false);
   const [modalType, setModalType] = useState<TabType | null>(null);
@@ -379,7 +379,7 @@ export default function HistorialMedicoPage() {
         <div className="flex items-center gap-3">
           <select
             value={selectedPetId || ""}
-            onChange={(e) => setSelectedPetId(e.target.value ? parseInt(e.target.value) : null)}
+            onChange={(e) => setSelectedPetId(e.target.value || null)}
             className="px-3 py-2 text-sm border rounded-lg bg-white dark:bg-boxdark border-gray-300 dark:border-strokedark min-w-[200px] dark:text-white/90"
           >
             <option value="">Seleccionar mascota...</option>

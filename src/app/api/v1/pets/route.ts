@@ -21,7 +21,7 @@ export async function GET(request: NextRequest) {
 
     const where: {
       name?: { contains: string; mode: 'insensitive' };
-      ownerId?: number;
+      ownerId?: string;
     } = {};
 
     if (search) {
@@ -29,7 +29,7 @@ export async function GET(request: NextRequest) {
     }
 
     if (ownerId) {
-      where.ownerId = parseInt(ownerId);
+      where.ownerId = ownerId;
     }
 
     if (user.role === 'CLIENT') {
@@ -84,7 +84,7 @@ export async function POST(request: NextRequest) {
 
     const { name, species, breed, birthDate, weight, sex, reproductiveStatus, specialCharacteristics, microchipNumber, ownerId } = validation.data;
 
-    let petOwnerId: number;
+    let petOwnerId: string;
 
     if (user.role === 'CLIENT') {
       petOwnerId = user.userId;

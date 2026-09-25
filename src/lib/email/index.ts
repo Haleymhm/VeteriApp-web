@@ -12,7 +12,7 @@ const resend = new Resend(process.env.RESEND_API_KEY);
 const TEST_DOMAIN = 'resend.dev';
 
 interface AppointmentEmailData {
-  id: number;
+  id: string;
   date: Date;
   reason: string;
   status: 'PENDING' | 'CONFIRMED' | 'COMPLETED' | 'CANCELLED' | 'NO_SHOW';
@@ -104,13 +104,20 @@ async function sendEmail({
   }
 }
 
+function formatAppointmentRef(id: string): string {
+  return id.length > 8 ? id.slice(0, 8).toUpperCase() : id;
+}
+
 export async function sendAppointmentCreatedEmail(data: AppointmentEmailData) {
   const branding = await getBranding();
-  const html = await render(AppointmentCreatedEmail({ ...data, formatDate, branding: brandingProps(branding) }));
+  const ref = formatAppointmentRef(data.id);
+  const html = await render(
+    AppointmentCreatedEmail({ ...data, id: ref, formatDate, branding: brandingProps(branding) })
+  );
 
   return sendEmail({
     to: data.pet.owner.email,
-    subject: `${branding.clinicName}: cita solicitada #${data.id}`,
+    subject: `${branding.clinicName}: cita solicitada #${ref}`,
     html,
     fromEmail: branding.fromEmail,
     fromName: branding.fromName,
@@ -119,11 +126,14 @@ export async function sendAppointmentCreatedEmail(data: AppointmentEmailData) {
 
 export async function sendAppointmentConfirmedEmail(data: AppointmentEmailData) {
   const branding = await getBranding();
-  const html = await render(AppointmentConfirmedEmail({ ...data, formatDate, branding: brandingProps(branding) }));
+  const ref = formatAppointmentRef(data.id);
+  const html = await render(
+    AppointmentConfirmedEmail({ ...data, id: ref, formatDate, branding: brandingProps(branding) })
+  );
 
   return sendEmail({
     to: data.pet.owner.email,
-    subject: `${branding.clinicName}: cita confirmada #${data.id}`,
+    subject: `${branding.clinicName}: cita confirmada #${ref}`,
     html,
     fromEmail: branding.fromEmail,
     fromName: branding.fromName,
@@ -132,11 +142,14 @@ export async function sendAppointmentConfirmedEmail(data: AppointmentEmailData) 
 
 export async function sendAppointmentCancelledEmail(data: AppointmentEmailData) {
   const branding = await getBranding();
-  const html = await render(AppointmentCancelledEmail({ ...data, formatDate, branding: brandingProps(branding) }));
+  const ref = formatAppointmentRef(data.id);
+  const html = await render(
+    AppointmentCancelledEmail({ ...data, id: ref, formatDate, branding: brandingProps(branding) })
+  );
 
   return sendEmail({
     to: data.pet.owner.email,
-    subject: `${branding.clinicName}: cita cancelada #${data.id}`,
+    subject: `${branding.clinicName}: cita cancelada #${ref}`,
     html,
     fromEmail: branding.fromEmail,
     fromName: branding.fromName,
@@ -145,11 +158,14 @@ export async function sendAppointmentCancelledEmail(data: AppointmentEmailData) 
 
 export async function sendAppointmentCompletedEmail(data: AppointmentEmailData) {
   const branding = await getBranding();
-  const html = await render(AppointmentCompletedEmail({ ...data, formatDate, branding: brandingProps(branding) }));
+  const ref = formatAppointmentRef(data.id);
+  const html = await render(
+    AppointmentCompletedEmail({ ...data, id: ref, formatDate, branding: brandingProps(branding) })
+  );
 
   return sendEmail({
     to: data.pet.owner.email,
-    subject: `${branding.clinicName}: cita completada #${data.id}`,
+    subject: `${branding.clinicName}: cita completada #${ref}`,
     html,
     fromEmail: branding.fromEmail,
     fromName: branding.fromName,

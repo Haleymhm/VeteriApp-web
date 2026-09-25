@@ -18,7 +18,7 @@ export async function GET(request: NextRequest) {
     const where: Record<string, unknown> = {};
 
     if (petId) {
-      where.petId = parseInt(petId);
+      where.petId = petId;
     }
 
     if (user.role === 'CLIENT') {
@@ -107,8 +107,8 @@ export async function POST(request: NextRequest) {
       title: string;
       publicNotes: string;
       privateNotes: string | null;
-      petId: number;
-      vetId: number;
+      petId: string;
+      vetId: string;
       date?: Date;
       diagnosis?: string | null;
       treatment?: string | null;

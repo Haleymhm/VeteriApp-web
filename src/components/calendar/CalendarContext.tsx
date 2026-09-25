@@ -3,27 +3,27 @@
 import { createContext, useContext, useState, useCallback, ReactNode } from "react";
 
 export interface CalendarAppointment {
-  id: number;
+  id: string;
   date: string;
   reason: string;
   status: string;
   notes: string | null;
-  petId: number;
-  vetId: number | null;
+  petId: string;
+  vetId: string | null;
   categoryId: string;
   pet: {
-    id: number;
+    id: string;
     name: string;
     species: string;
     owner: {
-      id: number;
+      id: string;
       firstName: string;
       lastName: string;
       email: string;
     };
   };
   vet: {
-    id: number;
+    id: string;
     firstName: string;
     lastName: string;
     email: string;

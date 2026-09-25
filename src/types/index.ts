@@ -16,7 +16,7 @@ export interface PaginatedResponse<T> extends ApiResponse<T[]> {
 }
 
 export interface UserDTO {
-  id: number;
+  id: string;
   email: string;
   firstName: string;
   lastName: string;
@@ -25,25 +25,25 @@ export interface UserDTO {
 }
 
 export interface PetDTO {
-  id: number;
+  id: string;
   name: string;
   species: string;
   breed: string | null;
   birthDate: Date | null;
   weight: number | null;
-  ownerId: number;
+  ownerId: string;
   owner?: UserDTO;
   createdAt: Date;
 }
 
 export interface AppointmentDTO {
-  id: number;
+  id: string;
   date: Date;
   reason: string;
   status: AppointmentStatus;
   notes: string | null;
-  petId: number;
-  vetId: number | null;
+  petId: string;
+  vetId: string | null;
   pet?: PetDTO;
   vet?: UserDTO | null;
   createdAt: Date;
@@ -52,7 +52,7 @@ export interface AppointmentDTO {
 export type DewormingType = 'INTERNAL' | 'EXTERNAL' | 'BOTH';
 
 export interface VitalSignsDTO {
-  id: number;
+  id: string;
   weight: number | null;
   temperature: number | null;
   heartRate: number | null;
@@ -60,21 +60,21 @@ export interface VitalSignsDTO {
   capillaryRefillTime: string | null;
   dehydrationPercentage: number | null;
   mucousMembranes: string | null;
-  medicalRecordId: number;
+  medicalRecordId: string;
 }
 
 export interface ExamAttachmentDTO {
-  id: number;
+  id: string;
   fileName: string;
   fileUrl: string;
   fileType: string;
   description: string | null;
-  medicalRecordId: number;
+  medicalRecordId: string;
   createdAt: Date;
 }
 
 export interface VaccinationDTO {
-  id: number;
+  id: string;
   vaccineName: string;
   vaccineType: string;
   administrationDate: Date;
@@ -82,56 +82,56 @@ export interface VaccinationDTO {
   lotNumber: string | null;
   manufacturer: string | null;
   veterinarian: string | null;
-  petId: number;
-  createdById: number;
+  petId: string;
+  createdById: string;
   createdAt: Date;
 }
 
 export interface DewormingDTO {
-  id: number;
+  id: string;
   productName: string;
   type: DewormingType;
   dosage: string | null;
   date: Date;
   nextDate: Date | null;
-  petId: number;
-  createdById: number;
+  petId: string;
+  createdById: string;
   createdAt: Date;
 }
 
 export interface SurgicalHistoryDTO {
-  id: number;
+  id: string;
   procedure: string;
   date: Date | null;
   complications: string | null;
   notes: string | null;
   outcomes: string | null;
-  petId: number;
+  petId: string;
   createdAt: Date;
 }
 
 export interface ChronicConditionDTO {
-  id: number;
+  id: string;
   name: string;
   type: string;
   severity: string | null;
   diagnosisDate: Date | null;
   notes: string | null;
   isActive: boolean;
-  petId: number;
+  petId: string;
   createdAt: Date;
 }
 
 export interface MedicalRecordDTO {
-  id: number;
+  id: string;
   date: Date;
   title: string;
   diagnosis: string | null;
   treatment: string | null;
   publicNotes: string;
   privateNotes: string | null;
-  petId: number;
-  vetId: number;
+  petId: string;
+  vetId: string;
   pet?: PetDTO;
   vet?: UserDTO;
   vitals?: VitalSignsDTO | null;
@@ -158,14 +158,14 @@ export interface DashboardRevenueDTO {
 }
 
 export interface DashboardUpcomingAppointmentDTO {
-  id: number;
+  id: string;
   date: Date;
   reason: string;
   status: AppointmentStatus;
-  petId: number;
+  petId: string;
   petName: string;
   ownerName: string;
-  vetId: number | null;
+  vetId: string | null;
   vetName: string | null;
   categoryName: string;
   categoryColor: string;
@@ -177,7 +177,7 @@ export interface DashboardSpeciesBucketDTO {
 }
 
 export interface DashboardTopVetDTO {
-  vetId: number;
+  vetId: string;
   vetName: string;
   count: number;
 }

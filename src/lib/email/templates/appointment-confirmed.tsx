@@ -2,7 +2,7 @@ import { Text, Section, Hr } from '@react-email/components';
 import { BaseLayout } from './base.layout';
 
 interface AppointmentConfirmedEmailProps {
-  id: number;
+  id: string;
   date: Date;
   reason: string;
   status: string;

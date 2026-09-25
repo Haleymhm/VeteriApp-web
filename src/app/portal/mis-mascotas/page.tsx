@@ -7,7 +7,7 @@ import EmptyState from "@/components/ui/empty-state/EmptyState";
 import PetPassportCard from "@/components/portal/PetPassportCard";
 
 interface Pet {
-  id: number;
+  id: string;
   name: string;
   species: string;
   breed: string | null;
@@ -19,7 +19,7 @@ interface Pet {
   microchipNumber: string | null;
   createdAt: string;
   owner: {
-    id: number;
+    id: string;
     firstName: string;
     lastName: string;
     email: string;

@@ -3,7 +3,7 @@ import type { AuditLogData } from '@/services/audit-signature';
 
 describe('Audit Signature Service', () => {
   const baseAuditData: AuditLogData = {
-    userId: 1,
+    userId: 'a0000000-0000-0000-0000-000000000001',
     userFullName: 'John Doe',
     userEmail: 'john@example.com',
     action: 'CREATE',
@@ -28,7 +28,7 @@ describe('Audit Signature Service', () => {
 
     it('should generate different hashes for different data', () => {
       const hash1 = calculateHash(baseAuditData, '0');
-      const hash2 = calculateHash({ ...baseAuditData, userId: 2 }, '0');
+      const hash2 = calculateHash({ ...baseAuditData, userId: 'a0000000-0000-0000-0000-000000000002' }, '0');
       expect(hash1).not.toBe(hash2);
     });
 
@@ -180,7 +180,7 @@ describe('Audit Signature Service', () => {
       const originalData = { ...baseAuditData, previousHash };
       const signature = generateSignature(originalData);
 
-      const tamperedData = { ...baseAuditData, userId: 999, previousHash };
+      const tamperedData = { ...baseAuditData, userId: 'b9999999-9999-9999-9999-999999999999', previousHash };
       const isValid = verifySignature({ ...tamperedData, signature });
       expect(isValid).toBe(false);
     });

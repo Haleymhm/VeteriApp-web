@@ -17,7 +17,7 @@ export async function GET(
 
     const { id } = await params;
     const medicalRecord = await prisma.medicalRecord.findUnique({
-      where: { id: parseInt(id) },
+      where: { id },
       include: {
         pet: {
           select: {
@@ -89,7 +89,7 @@ export async function PUT(
     const { date, title, diagnosis, treatment, publicNotes, privateNotes, vitals } = validation.data;
 
     const existing = await prisma.medicalRecord.findUnique({
-      where: { id: parseInt(id) },
+      where: { id },
       include: { vitals: true },
     });
 
@@ -119,7 +119,7 @@ export async function PUT(
     if (privateNotes !== undefined) updateData.privateNotes = privateNotes;
 
     const medicalRecord = await prisma.medicalRecord.update({
-      where: { id: parseInt(id) },
+      where: { id },
       data: updateData,
       include: {
         pet: {
@@ -231,7 +231,7 @@ export async function DELETE(
 
     const { id } = await params;
     const existing = await prisma.medicalRecord.findUnique({
-      where: { id: parseInt(id) },
+      where: { id },
     });
 
     if (!existing) {
@@ -253,7 +253,7 @@ export async function DELETE(
     });
 
     await prisma.medicalRecord.delete({
-      where: { id: parseInt(id) },
+      where: { id },
     });
 
     return successResponse(null, 'Historia médica eliminada exitosamente');

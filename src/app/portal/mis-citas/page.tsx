@@ -9,14 +9,14 @@ interface Category {
 }
 
 interface Appointment {
-  id: number;
+  id: string;
   date: string;
   reason: string;
   status: string;
   notes: string | null;
   category: Category | null;
   pet: {
-    id: number;
+    id: string;
     name: string;
     species: string;
   };

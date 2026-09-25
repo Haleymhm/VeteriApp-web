@@ -201,7 +201,7 @@ describe('Audit Module - createAuditLog', () => {
   });
 
   const mockUser = {
-    userId: 1,
+    userId: 'a0000000-0000-0000-0000-000000000001',
     firstName: 'John',
     lastName: 'Doe',
     email: 'john@example.com',
@@ -221,7 +221,7 @@ describe('Audit Module - createAuditLog', () => {
 
     expect(prisma.auditLog.create).toHaveBeenCalledTimes(1);
     const createCall = prisma.auditLog.create.mock.calls[0];
-    expect(createCall[0].data.userId).toBe(1);
+    expect(createCall[0].data.userId).toBe('a0000000-0000-0000-0000-000000000001');
     expect(createCall[0].data.userFullName).toBe('John Doe');
     expect(createCall[0].data.action).toBe('CREATE');
     expect(createCall[0].data.module).toBe('pets');

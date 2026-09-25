@@ -8,7 +8,7 @@ import { useModal } from "../../hooks/useModal";
 import { useRouter } from "next/navigation";
 
 interface ProfileUser {
-  id: number;
+  id: string;
   email: string;
   firstName: string;
   lastName: string;

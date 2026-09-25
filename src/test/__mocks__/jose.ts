@@ -22,7 +22,7 @@ export const jwtVerify = jest.fn().mockImplementation((token: string) => {
 
   return Promise.resolve({
     payload: {
-      userId: 1,
+      userId: 'a0000000-0000-4000-a000-000000000001',
       email: 'test@example.com',
       role: 'CLIENT',
       firstName: 'John',

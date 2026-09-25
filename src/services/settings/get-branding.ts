@@ -34,7 +34,7 @@ export async function getBranding(): Promise<ClinicBranding> {
   return DEFAULT_BRANDING;
 }
 
-export async function saveBranding(branding: ClinicBranding, updatedById?: number) {
+export async function saveBranding(branding: ClinicBranding, updatedById?: string) {
   await prisma.clinicSetting.upsert({
     where: { key: 'branding' },
     update: {

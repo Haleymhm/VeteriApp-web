@@ -11,7 +11,7 @@ interface AuditLogDetail {
 
 interface AuditLog {
   id: string;
-  userId: number;
+  userId: string;
   userFullName: string;
   userEmail: string;
   action: string;
@@ -24,7 +24,7 @@ interface AuditLog {
 }
 
 interface User {
-  id: number;
+  id: string;
   firstName: string;
   lastName: string;
   email: string;

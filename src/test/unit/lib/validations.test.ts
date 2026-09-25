@@ -331,7 +331,7 @@ describe('Validations - Pet Schemas', () => {
     reproductiveStatus: 'FERTILE' as const,
     specialCharacteristics: 'Muy juguetón',
     microchipNumber: '123456789012345',
-    ownerId: 1,
+    ownerId: 'a0000000-0000-4000-a000-000000000001',
   };
 
   describe('CreatePetSchema', () => {
@@ -390,17 +390,15 @@ describe('Validations - Pet Schemas', () => {
       expect(result.success).toBe(false);
     });
 
-    it('should accept ownerId as number and as numeric string', () => {
-      const numeric = CreatePetSchema.safeParse({ ...validPet, ownerId: 1 });
-      const stringified = CreatePetSchema.safeParse({ ...validPet, ownerId: '1' });
-      expect(numeric.success).toBe(true);
-      expect(stringified.success).toBe(true);
-      if (numeric.success && stringified.success) {
-        expect(stringified.data.ownerId).toBe(1);
+    it('should accept ownerId as a valid UUID string', () => {
+      const result = CreatePetSchema.safeParse({ ...validPet, ownerId: 'a0000000-0000-4000-a000-000000000001' });
+      expect(result.success).toBe(true);
+      if (result.success) {
+        expect(result.data.ownerId).toBe('a0000000-0000-4000-a000-000000000001');
       }
     });
 
-    it('should reject non-numeric ownerId string', () => {
+    it('should reject non-UUID ownerId string', () => {
       const result = CreatePetSchema.safeParse({ ...validPet, ownerId: 'abc' });
       expect(result.success).toBe(false);
     });
@@ -429,8 +427,8 @@ describe('Validations - Appointment Schemas', () => {
     date: '2024-12-15T10:00:00.000Z',
     reason: 'Vacunación anual',
     categoryId: '550e8400-e29b-41d4-a716-446655440000',
-    petId: 1,
-    vetId: 2,
+    petId: '550e8400-e29b-41d4-a716-446655440001',
+    vetId: '550e8400-e29b-41d4-a716-446655440002',
     notes: 'Primera visita',
   };
 
@@ -444,7 +442,7 @@ describe('Validations - Appointment Schemas', () => {
       const result = CreateAppointmentSchema.safeParse({
         reason: 'Vacunación',
         categoryId: '550e8400-e29b-41d4-a716-446655440000',
-        petId: 1,
+        petId: '550e8400-e29b-41d4-a716-446655440001',
       });
       expect(result.success).toBe(false);
     });
@@ -453,7 +451,7 @@ describe('Validations - Appointment Schemas', () => {
       const result = CreateAppointmentSchema.safeParse({
         date: '2024-12-15T10:00:00.000Z',
         categoryId: '550e8400-e29b-41d4-a716-446655440000',
-        petId: 1,
+        petId: '550e8400-e29b-41d4-a716-446655440001',
       });
       expect(result.success).toBe(false);
     });
@@ -466,10 +464,10 @@ describe('Validations - Appointment Schemas', () => {
       expect(result.success).toBe(false);
     });
 
-    it('should require positive petId', () => {
+    it('should require valid petId (UUID)', () => {
       const result = CreateAppointmentSchema.safeParse({
         ...validAppointment,
-        petId: -1,
+        petId: 'not-a-uuid',
       });
       expect(result.success).toBe(false);
     });
@@ -568,7 +566,7 @@ describe('Validations - Medical Record Schemas', () => {
       treatment: 'Ninguno',
       publicNotes: 'El paciente se encuentra en buen estado',
       privateNotes: 'Notas privadas del veterinario',
-      petId: 1,
+      petId: '550e8400-e29b-41d4-a716-446655440001',
     };
 
     it('should accept valid medical record', () => {
@@ -579,7 +577,7 @@ describe('Validations - Medical Record Schemas', () => {
     it('should require title', () => {
       const result = CreateMedicalRecordSchema.safeParse({
         publicNotes: 'Notas públicas',
-        petId: 1,
+        petId: '550e8400-e29b-41d4-a716-446655440001',
       });
       expect(result.success).toBe(false);
     });
@@ -587,7 +585,7 @@ describe('Validations - Medical Record Schemas', () => {
     it('should require publicNotes', () => {
       const result = CreateMedicalRecordSchema.safeParse({
         title: 'Consulta',
-        petId: 1,
+        petId: '550e8400-e29b-41d4-a716-446655440001',
       });
       expect(result.success).toBe(false);
     });
@@ -619,11 +617,11 @@ describe('Validations - Medical Record Schemas', () => {
       expect(result.success).toBe(false);
     });
 
-    it('should require positive petId', () => {
+    it('should require valid petId (UUID)', () => {
       const result = CreateMedicalRecordSchema.safeParse({
         title: 'Consulta',
         publicNotes: 'Notas',
-        petId: -1,
+        petId: 'not-a-uuid',
       });
       expect(result.success).toBe(false);
     });

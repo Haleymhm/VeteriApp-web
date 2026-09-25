@@ -15,16 +15,14 @@ export async function DELETE(
   try {
     const admin = await requireAdmin();
     const { id } = await params;
-
-    const holidayId = parseInt(id);
-    if (isNaN(holidayId)) return errorResponse('ID inválido', 400);
+    if (!id) return errorResponse('ID inválido', 400);
 
     const holiday = await prisma.clinicHoliday.findUnique({
-      where: { id: holidayId },
+      where: { id },
     });
     if (!holiday) return notFoundResponse('Feriado');
 
-    await prisma.clinicHoliday.delete({ where: { id: holidayId } });
+    await prisma.clinicHoliday.delete({ where: { id } });
 
     await createAuditLog({
       user: {
@@ -35,7 +33,7 @@ export async function DELETE(
       },
       action: 'DELETE',
       module: 'Configuracion',
-      entityId: String(holidayId),
+      entityId: id,
       entityType: 'ClinicHoliday',
       ipAddress: await getClientIp(request),
       previousData: {

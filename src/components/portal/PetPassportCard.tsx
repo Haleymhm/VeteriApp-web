@@ -6,7 +6,7 @@ import SpeciesBadge from "@/components/common/SpeciesBadge";
 import { CopyIcon } from "@/icons";
 
 interface Pet {
-  id: number;
+  id: string;
   name: string;
   species: string;
   breed: string | null;

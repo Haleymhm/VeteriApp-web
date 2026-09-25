@@ -4,7 +4,7 @@ import type { AppointmentStatus, Role } from '@prisma/client';
 export type DashboardRange = 'month' | 'prev' | 'quarter' | 'year';
 
 export interface DashboardUser {
-  userId: number;
+  userId: string;
   role: Role;
   firstName: string;
   lastName: string;
@@ -101,7 +101,7 @@ function emptyStatusMap(statuses: readonly AppointmentStatus[]): Record<Appointm
 }
 
 interface VetFilter {
-  vetId?: number;
+  vetId?: string;
 }
 
 function buildVetFilter(user: DashboardUser): VetFilter {
@@ -131,19 +131,19 @@ export interface DashboardMetrics {
   appointmentsByStatus: Record<AppointmentStatus, number>;
   speciesDistribution: { species: string; count: number }[];
   upcomingAppointments: {
-    id: number;
+    id: string;
     date: Date;
     reason: string;
     status: AppointmentStatus;
-    petId: number;
+    petId: string;
     petName: string;
     ownerName: string;
-    vetId: number | null;
+    vetId: string | null;
     vetName: string | null;
     categoryName: string;
     categoryColor: string;
   }[];
-  topVets: { vetId: number; vetName: string; count: number }[];
+  topVets: { vetId: string; vetName: string; count: number }[];
 }
 
 export async function computeDashboardMetrics(
@@ -270,11 +270,11 @@ export async function computeDashboardMetrics(
     categoryColor: a.category.color,
   }));
 
-  let topVets: { vetId: number; vetName: string; count: number }[] = [];
+  let topVets: { vetId: string; vetName: string; count: number }[] = [];
   if (topVetGroups.length > 0) {
     const vetIds = topVetGroups
       .map((g) => g.vetId)
-      .filter((id): id is number => id !== null);
+      .filter((id): id is string => id !== null);
     if (vetIds.length > 0) {
       const vets = await prisma.user.findMany({
         where: { id: { in: vetIds } },
@@ -282,13 +282,12 @@ export async function computeDashboardMetrics(
       });
       const vetMap = new Map(vets.map((v) => [v.id, v]));
       topVets = topVetGroups
-        .filter((g) => g.vetId !== null)
+        .filter((g): g is typeof g & { vetId: string } => g.vetId !== null)
         .map((g) => {
-          const id = g.vetId as number;
-          const v = vetMap.get(id);
+          const v = vetMap.get(g.vetId);
           return {
-            vetId: id,
-            vetName: v ? `${v.firstName} ${v.lastName}`.trim() : `Vet #${id}`,
+            vetId: g.vetId,
+            vetName: v ? `${v.firstName} ${v.lastName}`.trim() : `Vet #${g.vetId}`,
             count: g._count._all,
           };
         });

@@ -4,7 +4,7 @@ import { imageFromUrl } from "./pdf/image-from-url";
 import { getBranding, hexToRgb, ClinicBranding } from "@/services/settings/get-branding";
 
 interface PetInfo {
-  id: number;
+  id: string;
   name: string;
   species: string;
   breed: string | null;
@@ -48,7 +48,7 @@ interface ChronicCondition {
 }
 
 interface MedicalRecord {
-  id: number;
+  id: string;
   date: string;
   title: string;
   diagnosis: string | null;

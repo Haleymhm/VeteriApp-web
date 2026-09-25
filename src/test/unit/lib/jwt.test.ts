@@ -3,7 +3,7 @@ import { jwtVerify, SignJWT } from 'jose';
 
 describe('JWT Authentication', () => {
   const mockPayload: JWTPayload = {
-    userId: 1,
+    userId: 'a0000000-0000-0000-0000-000000000001',
     email: 'test@example.com',
     role: 'CLIENT',
     firstName: 'John',
@@ -29,7 +29,7 @@ describe('JWT Authentication', () => {
 
     it('should create different tokens for different users', async () => {
       const token1 = await createToken(mockPayload);
-      const token2 = await createToken({ ...mockPayload, userId: 2 });
+      const token2 = await createToken({ ...mockPayload, userId: 'a0000000-0000-0000-0000-000000000002' });
       expect(token1).not.toBe(token2);
     });
 

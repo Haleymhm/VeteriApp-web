@@ -3,7 +3,7 @@
 import { useEffect, useState } from "react";
 
 interface User {
-  id: number;
+  id: string;
   email: string;
   firstName: string;
   lastName: string;
@@ -94,7 +94,7 @@ export default function UsuariosPage() {
     setShowModal(true);
   };
 
-  const handleDelete = async (id: number) => {
+  const handleDelete = async (id: string) => {
     if (!confirm("¿Está seguro de eliminar este usuario?")) return;
 
     try {

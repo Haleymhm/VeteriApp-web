@@ -16,7 +16,7 @@ interface Comuna {
 }
 
 interface Client {
-  id: number;
+  id: string;
   email: string;
   firstName: string;
   lastName: string;
@@ -27,7 +27,7 @@ interface Client {
   comunaId: string | null;
   role: string;
   createdAt: string;
-  pets: { id: number; name: string; species: string }[];
+  pets: { id: string; name: string; species: string }[];
   region?: { id: string; name: string };
   comuna?: { id: string; name: string };
 }
@@ -168,7 +168,7 @@ export default function ClientesPage() {
     setShowModal(true);
   };
 
-  const handleDelete = async (id: number) => {
+  const handleDelete = async (id: string) => {
     if (!confirm("¿Está seguro de eliminar este cliente?")) return;
 
     try {

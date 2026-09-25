@@ -7,7 +7,7 @@ import type { ApexOptions } from 'apexcharts';
 const ReactApexChart = dynamic(() => import('react-apexcharts'), { ssr: false });
 
 interface Props {
-  topVets: { vetId: number; vetName: string; count: number }[];
+  topVets: { vetId: string; vetName: string; count: number }[];
 }
 
 export default function TopVetsChart({ topVets }: Props) {

@@ -58,7 +58,7 @@ export default async function HomePage({ searchParams }: PageProps) {
   }
 
   const user = {
-    userId: parseInt(userId),
+    userId,
     role,
     firstName,
     lastName,

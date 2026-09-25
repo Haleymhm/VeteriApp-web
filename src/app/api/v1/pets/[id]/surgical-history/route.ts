@@ -17,7 +17,7 @@ export async function GET(
 
     const { id } = await params;
     const pet = await prisma.pet.findUnique({
-      where: { id: parseInt(id) },
+      where: { id },
       select: { id: true, ownerId: true },
     });
 
@@ -30,7 +30,7 @@ export async function GET(
     }
 
     const surgicalHistory = await prisma.surgicalHistory.findMany({
-      where: { petId: parseInt(id) },
+      where: { petId: id },
       orderBy: { date: 'desc' },
     });
 
@@ -67,7 +67,7 @@ export async function POST(
     const { procedure, date, complications, notes, outcomes } = validation.data;
 
     const pet = await prisma.pet.findUnique({
-      where: { id: parseInt(id) },
+      where: { id },
     });
 
     if (!pet) {
@@ -80,7 +80,7 @@ export async function POST(
       complications: complications || null,
       notes: notes || null,
       outcomes: outcomes || null,
-      petId: parseInt(id),
+      petId: id,
     };
 
     const surgicalRecord = await prisma.surgicalHistory.create({

@@ -5,7 +5,7 @@ import { StethoscopeIcon, SyringeIcon, MedicalClipboardIcon } from "@/icons/vete
 import VitalsOverview, { VitalSignsData } from "./VitalsOverview";
 
 export interface TimelineEvent {
-  id: string | number;
+  id: string;
   type: "CONSULTATION" | "VACCINE" | "DEWORMING" | "SURGERY";
   date: string;
   title: string;

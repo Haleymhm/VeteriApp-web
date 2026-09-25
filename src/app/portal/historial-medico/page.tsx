@@ -4,20 +4,20 @@ import { useEffect, useState } from "react";
 import { generateMedicalHistoryPDF } from "@/lib/medical-history-pdf";
 
 interface Pet {
-  id: number;
+  id: string;
   name: string;
   species: string;
   breed: string | null;
 }
 
 interface MedicalRecord {
-  id: number;
+  id: string;
   date: string;
   title: string;
   diagnosis: string | null;
   treatment: string | null;
   publicNotes: string;
-  pet: { id: number; name: string; species: string };
+  pet: { id: string; name: string; species: string };
   vet: { firstName: string; lastName: string };
   vitals: {
     weight: number | null;
@@ -29,7 +29,7 @@ interface MedicalRecord {
 }
 
 interface Vaccination {
-  id: number;
+  id: string;
   vaccineName: string;
   vaccineType: string;
   administrationDate: string;
@@ -37,7 +37,7 @@ interface Vaccination {
 }
 
 interface Deworming {
-  id: number;
+  id: string;
   productName: string;
   type: string;
   date: string;
@@ -45,7 +45,7 @@ interface Deworming {
 }
 
 interface ChronicCondition {
-  id: number;
+  id: string;
   name: string;
   type: string;
   severity: string | null;
@@ -57,7 +57,7 @@ type TabType = "consultas" | "vacunas" | "desparasitacion" | "condiciones";
 
 export default function HistorialMedicoPage() {
   const [pets, setPets] = useState<Pet[]>([]);
-  const [selectedPetId, setSelectedPetId] = useState<number | null>(null);
+  const [selectedPetId, setSelectedPetId] = useState<string | null>(null);
   const [activeTab, setActiveTab] = useState<TabType>("consultas");
   const [loading, setLoading] = useState(false);
 
@@ -89,10 +89,8 @@ export default function HistorialMedicoPage() {
             const params = new URLSearchParams(window.location.search);
             const petIdFromUrl = params.get("petId");
             if (petIdFromUrl) {
-              const petId = parseInt(petIdFromUrl);
-              // Solo si existe en la lista del cliente
-              if (allPets.some((p: Pet) => p.id === petId)) {
-                setSelectedPetId(petId);
+              if (allPets.some((p: Pet) => p.id === petIdFromUrl)) {
+                setSelectedPetId(petIdFromUrl);
               } else {
                 setSelectedPetId(allPets[0].id);
               }
@@ -220,7 +218,7 @@ export default function HistorialMedicoPage() {
         <div className="mb-6 flex items-center gap-4">
           <select
             value={selectedPetId || ""}
-            onChange={(e) => setSelectedPetId(e.target.value ? parseInt(e.target.value) : null)}
+            onChange={(e) => setSelectedPetId(e.target.value || null)}
             className="px-4 py-2 text-sm border rounded-lg bg-white dark:bg-boxdark border-gray-300 dark:border-strokedark min-w-[250px]"
           >
             {pets.map((pet) => (

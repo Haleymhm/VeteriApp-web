@@ -21,7 +21,7 @@ export async function GET(request: NextRequest) {
       },
     };
 
-    if (userId) where.userId = parseInt(userId);
+    if (userId) where.userId = userId;
     if (action) where.action = action;
     if (moduleFilter) where.module = moduleFilter;
 

@@ -11,7 +11,7 @@ import Badge from "../ui/badge/Badge";
 import Image from "next/image";
 
 interface Order {
-  id: number;
+  id: string;
   user: {
     image: string;
     name: string;
@@ -28,7 +28,7 @@ interface Order {
 // Define the table data using the interface
 const tableData: Order[] = [
   {
-    id: 1,
+    id: "1",
     user: {
       image: "/images/user/user-17.jpg",
       name: "Lindsey Curtis",
@@ -46,7 +46,7 @@ const tableData: Order[] = [
     status: "Active",
   },
   {
-    id: 2,
+    id: "2",
     user: {
       image: "/images/user/user-18.jpg",
       name: "Kaiya George",
@@ -60,7 +60,7 @@ const tableData: Order[] = [
     status: "Pending",
   },
   {
-    id: 3,
+    id: "3",
     user: {
       image: "/images/user/user-17.jpg",
       name: "Zain Geidt",
@@ -74,7 +74,7 @@ const tableData: Order[] = [
     status: "Active",
   },
   {
-    id: 4,
+    id: "4",
     user: {
       image: "/images/user/user-20.jpg",
       name: "Abram Schleifer",
@@ -92,7 +92,7 @@ const tableData: Order[] = [
     status: "Cancel",
   },
   {
-    id: 5,
+    id: "5",
     user: {
       image: "/images/user/user-21.jpg",
       name: "Carla George",

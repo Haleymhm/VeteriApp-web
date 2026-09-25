@@ -3,7 +3,7 @@
 import { useEffect, useState } from "react";
 
 interface Pet {
-  id: number;
+  id: string;
   name: string;
   species: string;
   breed: string | null;
@@ -16,14 +16,14 @@ interface Category {
 }
 
 interface Appointment {
-  id: number;
+  id: string;
   date: string;
   reason: string;
   categoryId: string;
   category: Category | null;
   status: string;
   pet: {
-    id: number;
+    id: string;
     name: string;
   };
   vet: {
@@ -65,7 +65,7 @@ export default function AgendarCitasPage() {
 
   const [publicSettings, setPublicSettings] = useState<{
     schedule: Record<string, { enabled: boolean; open: string; close: string }>;
-    upcomingHolidays: Array<{ id: number; date: string; label: string }>;
+    upcomingHolidays: Array<{ id: string; date: string; label: string }>;
   } | null>(null);
 
   const validateLocalSlot = (date: string, time: string): string | null => {
@@ -171,7 +171,7 @@ export default function AgendarCitasPage() {
           date: dateTime,
           reason: form.reason,
           categoryId: form.categoryId,
-          petId: parseInt(form.petId),
+          petId: form.petId,
           notes: form.notes || null,
         }),
       });

@@ -40,7 +40,7 @@ enum DewormingType {
 }
 
 model User {
-  id        Int      @id @default(autoincrement())
+  id        String   @id @default(uuid())
   email     String   @unique
   password  String
   firstName String
@@ -80,7 +80,7 @@ model Category {
 }
 
 model Pet {
-  id        Int       @id @default(autoincrement())
+  id        String    @id @default(uuid())
   name      String
   species   String
   breed     String?
@@ -90,7 +90,7 @@ model Pet {
   reproductiveStatus ReproductiveStatus?
   specialCharacteristics String?  @db.Text
   microchipNumber        String?
-  ownerId   Int
+  ownerId   String
   createdAt DateTime  @default(now())
   updatedAt DateTime  @updatedAt
 
@@ -104,13 +104,13 @@ model Pet {
 }
 
 model Appointment {
-  id        Int               @id @default(autoincrement())
+  id        String            @id @default(uuid())
   date      DateTime
   reason    String
   status    AppointmentStatus @default(PENDING)
   notes     String?
-  petId     Int
-  vetId     Int?
+  petId     String
+  vetId     String?
   categoryId String
   createdAt DateTime          @default(now())
   updatedAt DateTime          @updatedAt
@@ -121,15 +121,15 @@ model Appointment {
 }
 
 model MedicalRecord {
-  id           Int      @id @default(autoincrement())
+  id           String   @id @default(uuid())
   date         DateTime @default(now())
   title        String
   diagnosis    String?  @db.Text
   treatment    String?  @db.Text
   publicNotes  String   @db.Text
   privateNotes String?  @db.Text
-  petId        Int
-  vetId        Int
+  petId        String
+  vetId        String
   createdAt    DateTime @default(now())
   updatedAt    DateTime @updatedAt
 
@@ -140,7 +140,7 @@ model MedicalRecord {
 }
 
 model VitalSigns {
-  id                    Int     @id @default(autoincrement())
+  id                    String  @id @default(uuid())
   weight                Float?
   temperature           Float?
   heartRate             Int?
@@ -148,25 +148,25 @@ model VitalSigns {
   capillaryRefillTime   String?
   dehydrationPercentage Float?
   mucousMembranes       String?
-  medicalRecordId       Int     @unique
+  medicalRecordId       String  @unique
 
   medicalRecord MedicalRecord @relation(fields: [medicalRecordId], references: [id], onDelete: Cascade)
 }
 
 model ExamAttachment {
-  id              Int      @id @default(autoincrement())
+  id              String   @id @default(uuid())
   fileName        String
   fileUrl         String
   fileType        String
   description     String?
-  medicalRecordId Int
+  medicalRecordId String
   createdAt       DateTime @default(now())
 
   medicalRecord MedicalRecord @relation(fields: [medicalRecordId], references: [id], onDelete: Cascade)
 }
 
 model Vaccination {
-  id                 Int       @id @default(autoincrement())
+  id                 String    @id @default(uuid())
   vaccineName        String
   vaccineType        String
   administrationDate DateTime  @default(now())
@@ -174,8 +174,8 @@ model Vaccination {
   lotNumber          String?
   manufacturer       String?
   veterinarian       String?
-  petId              Int
-  createdById        Int
+  petId              String
+  createdById        String
   createdAt          DateTime  @default(now())
 
   pet        Pet   @relation(fields: [petId], references: [id], onDelete: Cascade)
@@ -183,14 +183,14 @@ model Vaccination {
 }
 
 model Deworming {
-  id          Int          @id @default(autoincrement())
+  id          String       @id @default(uuid())
   productName String
   type        DewormingType
   dosage      String?
   date        DateTime     @default(now())
   nextDate    DateTime?
-  petId       Int
-  createdById Int
+  petId       String
+  createdById String
   createdAt   DateTime     @default(now())
 
   pet       Pet   @relation(fields: [petId], references: [id], onDelete: Cascade)
@@ -198,27 +198,27 @@ model Deworming {
 }
 
 model SurgicalHistory {
-  id          Int       @id @default(autoincrement())
+  id          String    @id @default(uuid())
   procedure   String
   date        DateTime?
   complications String?  @db.Text
   notes       String?   @db.Text
   outcomes    String?   @db.Text
-  petId       Int
+  petId       String
   createdAt   DateTime  @default(now())
 
   pet Pet @relation(fields: [petId], references: [id], onDelete: Cascade)
 }
 
 model ChronicCondition {
-  id            Int       @id @default(autoincrement())
+  id            String    @id @default(uuid())
   name          String
   type          String
   severity      String?
   diagnosisDate DateTime?
   notes         String?   @db.Text
   isActive      Boolean   @default(true)
-  petId         Int
+  petId         String
   createdAt     DateTime  @default(now())
 
   pet Pet @relation(fields: [petId], references: [id], onDelete: Cascade)
@@ -251,7 +251,7 @@ model Comuna {
 
 model AuditLog {
   id           String    @id @default(uuid())
-  userId       Int
+  userId       String
   userFullName String
   userEmail    String
   action       String
@@ -274,8 +274,8 @@ model AuditLog {
 }
 
 model PasswordResetToken {
-  id        Int      @id @default(autoincrement())
-  userId    Int
+  id        String   @id @default(uuid())
+  userId    String
   tokenHash String   @unique
   expiresAt DateTime
   usedAt    DateTime?
@@ -304,17 +304,17 @@ model ClinicSetting {
   key         String   @unique
   value       Json
   updatedAt   DateTime @updatedAt
-  updatedById Int?
+  updatedById String?
   updatedBy   User?    @relation("ClinicSettingUpdatedBy", fields: [updatedById], references: [id])
 
   @@index([key])
 }
 
 model ClinicHoliday {
-  id          Int      @id @default(autoincrement())
+  id          String   @id @default(uuid())
   date        DateTime @unique
   label       String
-  createdById Int
+  createdById String
   createdBy   User     @relation("ClinicHolidayCreatedBy", fields: [createdById], references: [id])
   createdAt   DateTime @default(now())
 
