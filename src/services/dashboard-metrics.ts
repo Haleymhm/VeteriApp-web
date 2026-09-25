@@ -282,13 +282,12 @@ export async function computeDashboardMetrics(
       });
       const vetMap = new Map(vets.map((v) => [v.id, v]));
       topVets = topVetGroups
-        .filter((g) => g.vetId !== null)
+        .filter((g): g is typeof g & { vetId: string } => g.vetId !== null)
         .map((g) => {
-          const id = g.vetId as string;
-          const v = vetMap.get(id);
+          const v = vetMap.get(g.vetId);
           return {
-            vetId: id,
-            vetName: v ? `${v.firstName} ${v.lastName}`.trim() : `Vet #${id}`,
+            vetId: g.vetId,
+            vetName: v ? `${v.firstName} ${v.lastName}`.trim() : `Vet #${g.vetId}`,
             count: g._count._all,
           };
         });

@@ -44,9 +44,9 @@ function asPrisma(mock: PrismaMock): Parameters<typeof computeDashboardMetrics>[
   return mock as unknown as Parameters<typeof computeDashboardMetrics>[0];
 }
 
-const adminUser: DashboardUser = { userId: 'a0000000-0000-0000-0000-000000000001', role: 'ADMIN', firstName: 'Admin', lastName: 'Root', email: 'admin@test.com' };
-const vetUser: DashboardUser = { userId: 'a0000000-0000-0000-0000-000000000007', role: 'VET', firstName: 'Ana', lastName: 'Vet', email: 'ana@test.com' };
-const receptUser: DashboardUser = { userId: 'a0000000-0000-0000-0000-000000000003', role: 'RECEPTIONIST', firstName: 'Re', lastName: 'Cep', email: 'r@test.com' };
+const adminUser: DashboardUser = { userId: 'a0000000-0000-4000-a000-000000000001', role: 'ADMIN', firstName: 'Admin', lastName: 'Root', email: 'admin@test.com' };
+const vetUser: DashboardUser = { userId: 'a0000000-0000-4000-a000-000000000007', role: 'VET', firstName: 'Ana', lastName: 'Vet', email: 'ana@test.com' };
+const receptUser: DashboardUser = { userId: 'a0000000-0000-4000-a000-000000000003', role: 'RECEPTIONIST', firstName: 'Re', lastName: 'Cep', email: 'r@test.com' };
 
 describe('dashboard-metrics service', () => {
   describe('getRangeDates', () => {
@@ -174,7 +174,7 @@ describe('dashboard-metrics service', () => {
 
     it('counts active pets from returned ids', async () => {
       const mock = createPrismaMock();
-      (mock.pet.findMany as jest.Mock).mockResolvedValueOnce([{ id: 1 }, { id: 2 }, { id: 3 }]);
+      (mock.pet.findMany as jest.Mock).mockResolvedValueOnce([{ id: 'p1' }, { id: 'p2' }, { id: 'p3' }]);
       (mock.pet.count as jest.Mock).mockResolvedValueOnce(2);
       const r = await computeDashboardMetrics(asPrisma(mock), adminUser, 'month');
       expect(r.pets.active).toBe(3);
@@ -185,20 +185,20 @@ describe('dashboard-metrics service', () => {
       const mock = createPrismaMock();
       (mock.appointment.findMany as jest.Mock).mockResolvedValueOnce([
         {
-          id: 11,
+          id: 'apt-11',
           date: new Date('2026-07-10T10:00:00Z'),
           reason: 'Vacunación',
           status: 'CONFIRMED',
-          pet: { id: 1, name: 'Firulais', owner: { firstName: 'Juan', lastName: 'Pérez' } },
-          vet: { id: 7, firstName: 'Ana', lastName: 'Vet' },
+          pet: { id: 'p1', name: 'Firulais', owner: { firstName: 'Juan', lastName: 'Pérez' } },
+          vet: { id: 'v7', firstName: 'Ana', lastName: 'Vet' },
           category: { name: 'Vacuna', color: '#3b82f6' },
         },
         {
-          id: 12,
+          id: 'apt-12',
           date: new Date('2026-07-11T11:00:00Z'),
           reason: 'Control',
           status: 'PENDING',
-          pet: { id: 2, name: 'Mishi', owner: { firstName: 'Maria', lastName: 'Soto' } },
+          pet: { id: 'p2', name: 'Mishi', owner: { firstName: 'Maria', lastName: 'Soto' } },
           vet: null,
           category: { name: 'General', color: '#10b981' },
         },
@@ -216,20 +216,20 @@ describe('dashboard-metrics service', () => {
       (mock.appointment.groupBy as jest.Mock).mockImplementation((args: { by: string[] }) => {
         if (args.by.includes('vetId')) {
           return Promise.resolve([
-            { vetId: 7, _count: { _all: 18 } },
-            { vetId: 8, _count: { _all: 12 } },
+            { vetId: 'v7', _count: { _all: 18 } },
+            { vetId: 'v8', _count: { _all: 12 } },
           ]);
         }
         return Promise.resolve([]);
       });
       (mock.user.findMany as jest.Mock).mockResolvedValueOnce([
-        { id: 7, firstName: 'Ana', lastName: 'Vet' },
-        { id: 8, firstName: 'Pedro', lastName: 'Vet' },
+        { id: 'v7', firstName: 'Ana', lastName: 'Vet' },
+        { id: 'v8', firstName: 'Pedro', lastName: 'Vet' },
       ]);
       const r = await computeDashboardMetrics(asPrisma(mock), adminUser, 'month');
       expect(r.topVets).toEqual([
-        { vetId: 7, vetName: 'Ana Vet', count: 18 },
-        { vetId: 8, vetName: 'Pedro Vet', count: 12 },
+        { vetId: 'v7', vetName: 'Ana Vet', count: 18 },
+        { vetId: 'v8', vetName: 'Pedro Vet', count: 12 },
       ]);
     });
 
@@ -249,7 +249,7 @@ describe('dashboard-metrics service', () => {
       const allCalls = [...countCalls, ...findManyCalls, ...groupByCalls];
       for (const callArgs of allCalls) {
         const where = callArgs[0]?.where ?? {};
-        expect(where.vetId).toBe(7);
+        expect(where.vetId).toBe(vetUser.userId);
       }
     });
 

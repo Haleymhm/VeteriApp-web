@@ -7,7 +7,7 @@ import { Dropdown } from "../ui/dropdown/Dropdown";
 import { DropdownItem } from "../ui/dropdown/DropdownItem";
 
 interface UserData {
-  userId: number;
+  userId: string;
   email: string;
   firstName: string;
   lastName: string;
