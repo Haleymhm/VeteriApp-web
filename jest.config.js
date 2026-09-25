@@ -7,7 +7,9 @@ const config = {
     '^@/(.*)$': '<rootDir>/src/$1',
     '^jose$': '<rootDir>/src/test/__mocks__/jose.ts',
   },
-  testMatch: ['**/src/**/*.{test,spec}.{ts,tsx}'],
+  testMatch: ['<rootDir>/src/**/*.{test,spec}.{ts,tsx}'],
+  testPathIgnorePatterns: ['<rootDir>/.kilo/', '<rootDir>/node_modules/'],
+  modulePathIgnorePatterns: ['<rootDir>/.kilo/'],
   collectCoverageFrom: [
     'src/lib/**/*.ts',
     'src/services/**/*.ts',
