@@ -42,10 +42,6 @@ next-env.d.ts
 .idea
 .vscode
 
-# Logs
-logs
-./logs
-
 # Docs
 /docs
 docs/
